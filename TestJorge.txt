@@ -1,0 +1,4 @@
+first line in the text (original line) 
+cambio 1 
+cambio 2
+cambio 3
