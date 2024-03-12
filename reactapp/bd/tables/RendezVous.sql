@@ -1,3 +1,4 @@
+--Travail fait par Jorge/Alejandro
 create table RendezVous(
     idRDV INT PRIMARY KEY identity(1,1),
     idSalonCoiffure INT FOREIGN KEY references SalonCoiffure(IDSalon),

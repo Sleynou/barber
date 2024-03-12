@@ -1,3 +1,4 @@
+--Travail fait par Jorge/Alejandro
 create table Services(
     idService int not null identity(1,1),
     idSalon int not null,

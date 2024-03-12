@@ -1,3 +1,4 @@
+--Travail fait par Jorge/Alejandro
 create table SalonCoiffure(
     idSalon int not null identity(1,1),
     nomSalon varchar(50) not null,

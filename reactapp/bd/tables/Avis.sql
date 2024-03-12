@@ -1,3 +1,5 @@
+--Travail fait par Jorge/Alejandro
+
 -- Create a new table called 'Avis' in schema '
 -- Drop the table if it already exists
 IF OBJECT_ID('Avis', 'U') IS NOT NULL

@@ -1,3 +1,4 @@
+--Travail fait par Jorge/Alejandro
 create table DisponibiliteCoiffeur(
     idDispoC INT IDENTITY(1,1),
     idCoiffeur INT,

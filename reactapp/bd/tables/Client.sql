@@ -1,3 +1,4 @@
+--Travail fait par Jorge/Alejandro
 create table Client(
     idCLIENT int PRIMARY KEY IDENTITY(1,1), 
     PrenomClient varchar(50) not null, 

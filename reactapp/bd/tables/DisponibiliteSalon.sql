@@ -1,3 +1,4 @@
+--Travail fait par Jorge/Alejandro
 create table DisponibiliteSalon(
     idDispoS int not null IDENTITY(1,1),
     idSalon int not null,
