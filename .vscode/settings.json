@@ -1,0 +1,5 @@
+{
+    "dataworkspace.excludedProjects": [
+        "reactapp/BdProjet/BdProjet.sqlproj"
+    ]
+}
