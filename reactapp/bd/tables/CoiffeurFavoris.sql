@@ -1,5 +1,5 @@
 create table CoiffeurFavoris (
-    idFavoris INT PRIMARY KEY, 
-    idClient INT FOREIGN KEY references Client(IDclient), 
-    idCoiffeur INT FOREIGN KEY references Coiffeur (IDCoiffeur)
+    idFavoris INT PRIMARY KEY IDENTITY(1,1), 
+    idClient INT FOREIGN KEY references Client(idCLIENT), 
+    idCoiffeur INT FOREIGN KEY references Coiffeur(IDCoiffeur)
     )
