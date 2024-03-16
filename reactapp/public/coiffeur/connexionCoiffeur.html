@@ -1,53 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TP1</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-</head>
-<body>
-<div class="container">
-    <nav class="navbar " role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="index.html"> TP1 </a>
-        </div>
-    </nav>
-    <div class="section">
-        <div class="content">
-            <div class="field">
-                <label for="email" class="label"> Email </label>
-                <div class="control has-icons-left">
-                    <input id="email" type="email" placeholder="e1234567@site.com" class="input" autocomplete="email" required/>
-                    <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
-                </div>
-            </div>
-            <div class="field">
-                <label for="password" class="label"> Password </label>
-                <div class="control has-icons-left">
-                    <input id="password" type="password" placeholder="*******" class="input" autocomplete="password" required>
-                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label"></label>
-                <div class="control">
-                    <button id="connexion" class="button is-success"> Connexion </button>
-                    <button id="annuler" class="button is-danger"> Annuler </button>
-                </div>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ElBarber</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+        <link rel="stylesheet" href="../styles.css" />
+    </head>
+    <body>
+        <div id="menu-accueil">
+            <div class="container" class="mon-conteneur-flex">
+                <header>
+                    <div class="flex-menu-accueil">
+                        <img id="logo" src="../img/logo.png" alt="logo" />
+                    </div>
+                    <div class="header" id="titre">
+                        <h1>Espace Coiffeur Connexion</h1>
+                    </div>
+                </header>
             </div>
         </div>
-    </div>
-</div>
-<footer class="footer">
-    <div class="container">
-        <div class="content has-text-centered">
-            <p>e2266845</p>
+        <div class="section">
+            <div class="content">
+
+                <div class="field">
+                    <label for="email" class="label"> Email </label>
+                    <div class="control has-icons-left">
+                        <input id="email" type="email" placeholder="email@email.com" class="input" autocomplete="email" required/>
+                        <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="password" class="label"> Password </label>
+                    <div class="control has-icons-left">
+                        <input id="password" type="password" placeholder="*******" class="input" autocomplete="password" required>
+                        <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label"></label>
+                    <div class="control">
+                        <button id="connexion" class="button is-success"> Connexion </button>
+                        <button id="annuler" class="button is-danger"> Annuler </button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    Vous n'avez pas de compte? <a href="inscriptionCoiffeur.html">Créer votre compte coiffeur ici </a>
+                </div>
+
+            </div>
         </div>
-    </div>
-</footer>
-<script src="connexion.js" type="module"></script>
-</body>
+        <footer>
+            <div class="container">
+                <div class="flex-contact">
+                    <div class="flex">
+                        <h2>Pour nous joindre</h2>
+                        <address>
+                            <a href="mailto:ElBarber@gmail.com">ElBarber@gmail.com</a>
+                        </address>
+                        <address>
+                            <a href="tel:438-123-456">438-123-456</a>
+                        </address>
+                        <div class="flex-logo">
+                            <img class="logo2" src="../img/facebook.png" alt="facebook" />
+                            <img id="logo2-insta" src="../img/instagram.png" alt="facebook" />
+                            <img class="logo2" src="../img/linkedin.png" alt="facebook" />
+                        </div>
+                    </div>
+                    <div class="flex-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d22350.70532600428!2d-73.54720552183143!3d45.55358099250924!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91bf5bacbeffd%3A0x68ff300997eff5c!2sColl%C3%A8ge%20de%20Maisonneuve!5e0!3m2!1sfr!2sca!4v1702967268796!5m2!1sfr!2sca"
+                            width="600"
+                            height="450"
+                            style="border: 0"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="connexion.js" type="module"></script>
+    </body>
 </html>
