@@ -92,18 +92,21 @@ main {
 	margin: 0 auto;
 }
 
+body{
+	background-image: url(/reactapp/public/img/backgroundlogin.jpg);
+}
 main{
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-image: url(/reactapp/public/img/backgroundlogin.jpg);
+	
 	background-position: center;
 	background-size: cover;
 	
 }
 
-.menu-header {
+body {
 	background-color: #525252cb;
 	background-size: cover;
 	background-position: center;
@@ -197,6 +200,7 @@ address :link {
 }
 
 .flex-map {
+	max-width: 500px;
 
 	width: 50%;
 	border: solid white 5px;
