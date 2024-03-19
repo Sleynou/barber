@@ -11,15 +11,36 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
 
+
+
+
   <body>
-    <div id="menu-accueil">
-      <div class="container" class="mon-conteneur-flex">
-        <header>
-          <div class="flex-menu-accueil">
-            <img id="logo" src="img/logo.png" alt="logo" />
+    <div>
+      <div>
+        <header >
+          <div class="navbar">
+            <img id="logo" src="/reactapp/public/img/logo.png" alt="logo"/>
+            <div class="container">
+              <div>
+                <a href="/reactapp/public/client/accueilClient.html">Accueil</a>
+                <a href="/reactapp/public/client/profilClient.html">Profil</a>
+                <a href="/reactapp/public/client/historiqueRdvClient.html">Historique</a>
+                <a href="/reactapp/public/client/prochainRdvClient.html">A venir</a>
+                <a href="/reactapp/public/client/coiffeurFavoris.html">Favoris</a>
+
+              </div>
+
+            <div id="connexionDeconnexion">
+              <a id="connexion" href="/reactapp/public/client/connexionClient.html">Connexion</a>
+              <a id="deconnexion" href="/reactapp/public/Accueil.html">Deconnexion</a>
+            </div>
+
+            </div>
           </div>
-          <div class="header" id="titre">
-            <h1>BIENVENUE</h1>
+          <div class="menu-header">
+            <div>
+              <h1 id="titre">EL BARBER</h1>
+            </div>
           </div>
         </header>
       </div>
@@ -27,7 +48,6 @@
     <main></main>
 
     <footer>
-        <div class="container">
           <div class="flex-contact">
             <div class="flex">
               <h2>Pour nous joindre</h2>
@@ -56,7 +76,6 @@
               ></iframe>
             </div>
           </div>
-        </div>
       </footer>
   
       <script src="script.js"></script>
