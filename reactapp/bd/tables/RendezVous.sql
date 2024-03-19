@@ -6,5 +6,5 @@ create table RendezVous(
     idService INT FOREIGN KEY references Services(idService ),
     idCoiffeur INT FOREIGN KEY references Coiffeur (IDCoiffeur),
     dateRDV Date not null,
-    Heure TIME not null
+    heure TIME not null
     )

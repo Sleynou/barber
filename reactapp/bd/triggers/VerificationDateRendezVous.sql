@@ -8,7 +8,7 @@ BEGIN
 
     declare @differenceTime int;
 
-    select @date = dateRDV, @heure = Heure
+    select @date = dateRDV, @heure = heure
     from inserted;
 
     set @differenceTime = DATEDIFF(minute, getdate(), CONVERT(DATETIME, CONVERT(CHAR(8), @date, 112) + ' ' + CONVERT(CHAR(8), @heure, 108)))

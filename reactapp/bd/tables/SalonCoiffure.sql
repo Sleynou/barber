@@ -4,6 +4,8 @@ create table SalonCoiffure(
     nomSalon varchar(50) not null,
     telephoneSalon varchar(50) not null,
     adresse varchar(50) not null,
+    Email varchar(50) not null,
+    MotDePasse VARCHAR(100) not null,
     bio text
     CONSTRAINT PK_SALON PRIMARY Key (idSalon)
 )

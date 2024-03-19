@@ -4,6 +4,8 @@ create table Coiffeur (
     IDSalon  INT,
     PrénomCoiffeur varchar(50) not null,
     NomCoiffeur  varchar(50) not null,
+    Email varchar(50) not null,
+    MotDePasse VARCHAR(100) not null,
     PhotoCoiffeur  varchar(50)
     CONSTRAINT PK_Coiffeur_IDCoiffeur PRIMARY KEY (iDCoiffeur),
     CONSTRAINT FK_Coiffeur_IDSalon FOREIGN KEY (idSalon) REFERENCES SalonCoiffure(idSalon)
