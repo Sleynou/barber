@@ -4,6 +4,7 @@ create table Services(
     idSalon int not null,
     nom varchar(50) not null,
     prix FLOAT,
+    duree TIME,
     CONSTRAINT PK_SERVICE PRIMARY Key (idService),
     CONSTRAINT FK_SERVICE_SALON FOREIGN KEY (idSalon) REFERENCES SalonCoiffure(idSalon)
 )
