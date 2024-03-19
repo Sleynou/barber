@@ -112,7 +112,11 @@ body {
 	background-position: center;
 }
 
-
+#menu-accueil {
+	background-image: url(img/background_img.jpg);
+	background-size: cover;
+	background-position: center;
+}
 
 
 nav li {
