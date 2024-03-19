@@ -357,3 +357,28 @@ main h2 {
 	width: 13rem;
 	color: black;
 }
+
+.li-calendar {
+	list-style: none;
+}
+
+.ul-calendar {
+	margin: 0;
+	padding: 0;
+}
+
+.calendar-container {
+	display: grid;
+	grid-template-columns: 10px auto;
+	grid-template-rows: auto;
+	gap: 1px 1px;
+	grid-template-areas: 
+		". header-calendar"
+		"timeslots-container main";
+}
+
+.weekdays,
+.daynumbers {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
