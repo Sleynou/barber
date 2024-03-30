@@ -24,8 +24,14 @@ const deleteCoiffeur = require('./deleteCoiffeur')
 const enregistrerService = require('./enregistrerService')
 const modifierService = require('./modifierService')
 const deleteService = require('./deleteService')
-const voirServicesParidSalon = require('./voirServicesParidSalon') // Ne marche pas
+const voirServicesParidSalon = require('./voirServicesParidSalon') 
 
+const enregistrerAvis = require('./enregistrerAvis')
+const voirAvisParidSalonCoiffure = require('./voirAvisParidSalonCoiffure')
+
+const enregistrerCoiffeurFavoris = require('./enregistrerCoiffeurFavoris')
+const voirCoiffeurFavorisParidClient = require('./voirCoiffeurFavorisParidClient')
+const deleteCoiffeurFavorisParidClientidCoiffeur = require('./deleteCoiffeurFavorisParidClientidCoiffeur')
 
 app.use(bodyParser.json())
 
@@ -51,6 +57,14 @@ app.use('/', enregistrerService)
 app.use('/', voirServicesParidSalon)
 app.use('/', modifierService)
 app.use('/', deleteService)
+
+app.use('/', enregistrerAvis)
+app.use('/', voirAvisParidSalonCoiffure)
+
+app.use('/', enregistrerCoiffeurFavoris)
+app.use('/', voirCoiffeurFavorisParidClient)
+app.use('/',deleteCoiffeurFavorisParidClientidCoiffeur)
+
 
 app.listen(port, () => {
     console.log(`Serveur s'exécutant sur le port ${port}`)
