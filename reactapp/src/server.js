@@ -3,35 +3,60 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 
-const registerClient = require('./registerClient')
-const loginClient = require('./loginClient')
-const modifierClient = require('./modifierClient')
-const logoutClient = require('./logoutClient')
-const deleteClient = require('./deleteClient')
+//Routes Client
+const registerClient = require('./routes/client/registerClient')
+const loginClient = require('./routes/client/loginClient')
+const modifierClient = require('./routes/client/modifierClient')
+const logoutClient = require('./routes/client/logoutClient')
+const deleteClient = require('./routes/client/deleteClient')
 
-const registerSalon = require('./registerSalon')
-const loginSalon = require('./loginSalon')
-const modifierSalon = require('./modifierSalon')
-const logoutSalon = require('./logoutSalon')
+// Routes Salon
+const registerSalon = require('./routes/salonCoiffure/registerSalon')
+const loginSalon = require('./routes/salonCoiffure//loginSalon')
+const modifierSalon = require('./routes/salonCoiffure//modifierSalon')
+const logoutSalon = require('./routes/salonCoiffure//logoutSalon')
 
-const registerCoiffeur = require('./registerCoiffeur')
-const loginCoiffeur = require('./loginCoiffeur')
-const modifierCoiffeur = require('./modifierCoiffeur')
-const voirCoiffeurParIDSalon = require('./voirCoiffeurParIDSalon')
-const logoutCoiffeur = require('./logoutCoiffeur')
-const deleteCoiffeur = require('./deleteCoiffeur')
+// Routes Coiffeur
+const registerCoiffeur = require('./routes/coiffeur/registerCoiffeur')
+const loginCoiffeur = require('./routes/coiffeur/loginCoiffeur')
+const modifierCoiffeur = require('./routes/coiffeur/modifierCoiffeur')
+const voirCoiffeurParIDSalon = require('./routes/coiffeur/voirCoiffeurParIDSalon')
+const logoutCoiffeur = require('./routes/coiffeur/logoutCoiffeur')
+const deleteCoiffeur = require('./routes/coiffeur/deleteCoiffeur')
 
-const enregistrerService = require('./enregistrerService')
-const modifierService = require('./modifierService')
-const deleteService = require('./deleteService')
-const voirServicesParidSalon = require('./voirServicesParidSalon') 
+// Routes Services
+const enregistrerService = require('./routes/service/enregistrerService')
+const modifierService = require('./routes/service/modifierService')
+const deleteService = require('./routes/service/deleteService')
+const voirServicesParidSalon = require('./routes/service/voirServicesParidSalon') 
 
-const enregistrerAvis = require('./enregistrerAvis')
-const voirAvisParidSalonCoiffure = require('./voirAvisParidSalonCoiffure')
+// Routes Avis
+const enregistrerAvis = require('./routes/avis/enregistrerAvis')
+const voirAvisParidSalonCoiffure = require('./routes/avis/voirAvisParidSalonCoiffure')
 
-const enregistrerCoiffeurFavoris = require('./enregistrerCoiffeurFavoris')
-const voirCoiffeurFavorisParidClient = require('./voirCoiffeurFavorisParidClient')
-const deleteCoiffeurFavorisParidClientidCoiffeur = require('./deleteCoiffeurFavorisParidClientidCoiffeur')
+// Routes CoiffeurFavoris
+const enregistrerCoiffeurFavoris = require('./routes/coiffeurFavoris/enregistrerCoiffeurFavoris')
+const voirCoiffeurFavorisParidClient = require('./routes/coiffeurFavoris/voirCoiffeurFavorisParidClient')
+const deleteCoiffeurFavorisParidClientidCoiffeur = require('./routes/coiffeurFavoris/deleteCoiffeurFavorisParidClientidCoiffeur')
+
+//Routes RendezVous
+const consulterRdvClient = require('./routes/rendezVous/consulterRdvClient')
+const consulterRdvCoiffeur = require('./routes/rendezVous/consulterRdvCoiffeur')
+const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvCSalon')
+const modifierRendezVous = require('./routes/rendezVous/modifierRendezVous')
+const prendreRendezVous = require('./routes/rendezVous/consulterRdvClient')
+
+// Routes DispoCoiffeur
+const ajouterDispoCoiffeur = require('./routes/disponibiliteCoiffeur/ajouterDispoCoiffeur')
+const consulterDispoCoiffeur = require('./routes/disponibiliteCoiffeur/consulterDispoCoiffeur')
+const deleteDispoCoiffeur = require('./routes/disponibiliteCoiffeur/deleteDispoCoiffeur')
+const modifierDispoCoiffeur = require('./routes/disponibiliteCoiffeur/modifierDispoCoiffeur')
+
+// Routes Dispo Salon
+const ajouterDispoSalon = require('./routes/disponibiliteSalon/ajouterDispoSalon')
+const consulterDipoSalon = require('./routes/disponibiliteSalon/consulterDipoSalon')
+const deleteDispoSalon = require('./routes/disponibiliteSalon/deleteDispoSalon')
+const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSalon')
 
 app.use(bodyParser.json())
 
@@ -65,6 +90,22 @@ app.use('/', enregistrerCoiffeurFavoris)
 app.use('/', voirCoiffeurFavorisParidClient)
 app.use('/',deleteCoiffeurFavorisParidClientidCoiffeur)
 
+
+app.use('/', consulterRdvClient)
+app.use('/', consulterRdvCoiffeur)
+app.use('/', consulterRdvCSalon)
+app.use('/', modifierRendezVous)
+app.use('/', prendreRendezVous)
+
+app.use('/', ajouterDispoCoiffeur)
+app.use('/', consulterDispoCoiffeur)
+app.use('/', deleteDispoCoiffeur)
+app.use('/', modifierDispoCoiffeur)
+
+app.use('/', ajouterDispoSalon)
+app.use('/', consulterDipoSalon)
+app.use('/', deleteDispoSalon)
+app.use('/', modifierDiposSalon)
 
 app.listen(port, () => {
     console.log(`Serveur s'exécutant sur le port ${port}`)
