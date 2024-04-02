@@ -6,12 +6,11 @@
     <link rel="icon" type="image/x-icon" href="/reactapp/public/img/logo.png" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
     <link
       rel="stylesheet"
-      href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
+      href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'/>
     <link rel="stylesheet" href="/reactapp/public/styles.css" />
   </head>
 
@@ -57,25 +56,28 @@
           <a href="/reactapp/public/client/avisClient.html">Avis</a>
           <a href="/reactapp/public/client/donnerAvisClient.html">Donner un avis</a>
         </div>
-        <div class="salonFlex">
-          <div class="divSalon">
-            <h1>BeautyShop</h1>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit,
-              commodi at. Itaque.
-            </p>
-            <button>Reserver</button>
-          
+        <div class="avisFlex">
+          <div class="avis">
+            <h3>Merci de donner votre avis</h3>
+            <form action="#" method="POST">
+              <div class="rating">
+                <input type="number" name="rating" hidden>
+                <i class='bx bx-star star' style="--i: 0;"></i>
+                <i class='bx bx-star star' style="--i: 1;"></i>
+                <i class='bx bx-star star' style="--i: 2;"></i>
+                <i class='bx bx-star star' style="--i: 3;"></i>
+                <i class='bx bx-star star' style="--i: 4;"></i>
+              </div>
+              <textarea name="opinion" cols="30" rows="5" placeholder="Votre opinion..."></textarea>
+              <div class="btn-group">
+                <button type="submit" class="btn submit">Submit</button>
+                <button class="btn cancel">Cancel</button>
+              </div>
+            </form>
           </div>
-          <div class="salon">
-            <div class="salonCard-container">
-              <div class="salonCard c1"></div>
-              <div class="salonCard c2"></div>
-              <div class="salonCard c3"></div>
-              <div class="salonCard c4"></div>
-            </div>
-          </div>
+
         </div>
+
       </div>
     </main>
 
@@ -124,6 +126,30 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+      const allStar = document.querySelectorAll('.rating .star')
+const ratingValue = document.querySelector('.rating input')
+
+allStar.forEach((item, idx)=> {
+	item.addEventListener('click', function () {
+		let click = 0
+		ratingValue.value = idx + 1
+
+		allStar.forEach(i=> {
+			i.classList.replace('bxs-star', 'bx-star')
+			i.classList.remove('active')
+		})
+		for(let i=0; i<allStar.length; i++) {
+			if(i <= idx) {
+				allStar[i].classList.replace('bx-star', 'bxs-star')
+				allStar[i].classList.add('active')
+			} else {
+				allStar[i].style.setProperty('--i', click)
+				click++
+			}
+		}
+	})
+})
+    </script>
   </body>
 </html>
