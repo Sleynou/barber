@@ -12,7 +12,7 @@ BEGIN
         BEGIN
  			print('[+] Utilisateur ajoute avec succes')
         END
-	ELSE if (select COUNT(@email) from Client) > 1)
+	ELSE if ( (select COUNT(@email) from Client) > 1 )
         begin
             RAISERROR('[-] L utilisateur existe deja', 16, 1)
 			rollback
