@@ -5,7 +5,7 @@ const db = require('../db');
 app.use(bodyParser.json())
 const router = express.Router()
 app.use(bodyParser.json())
-const checkBlacklist = require('./checkBlacklist')
+const checkBlacklist = require('../checkBlacklist')
 
 router.put('/modifierClient', checkBlacklist, async (req, res) => {
     try {

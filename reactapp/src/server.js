@@ -4,22 +4,22 @@ const app = express()
 const port = 3000
 
 //Routes Client
-const registerClient = require('./routes/client/registerClient')
+const registerClient = require('./routes/client/registrerClient')
 const loginClient = require('./routes/client/loginClient')
 const modifierClient = require('./routes/client/modifierClient')
 const logoutClient = require('./routes/client/logoutClient')
 const deleteClient = require('./routes/client/deleteClient')
 
 // Routes Salon
-const registerSalon = require('./routes/salonCoiffure/registerSalon')
+const registerSalon = require('./routes/salonCoiffure/registrerSalon')
 const loginSalon = require('./routes/salonCoiffure//loginSalon')
 const modifierSalon = require('./routes/salonCoiffure//modifierSalon')
 const logoutSalon = require('./routes/salonCoiffure//logoutSalon')
 
 // Routes Coiffeur
-const registerCoiffeur = require('./routes/coiffeur/registerCoiffeur')
+const registerCoiffeur = require('./routes/coiffeur/registrerCoiffeur')
 const loginCoiffeur = require('./routes/coiffeur/loginCoiffeur')
-const modifierCoiffeur = require('./routes/coiffeur/modifierCoiffeur')
+const modifierCoiffeur = require('./routes/coiffeur/midifierCoiffeur')
 const voirCoiffeurParIDSalon = require('./routes/coiffeur/voirCoiffeurParIDSalon')
 const logoutCoiffeur = require('./routes/coiffeur/logoutCoiffeur')
 const deleteCoiffeur = require('./routes/coiffeur/deleteCoiffeur')
@@ -42,8 +42,8 @@ const deleteCoiffeurFavorisParidClientidCoiffeur = require('./routes/coiffeurFav
 //Routes RendezVous
 const consulterRdvClient = require('./routes/rendezVous/consulterRdvClient')
 const consulterRdvCoiffeur = require('./routes/rendezVous/consulterRdvCoiffeur')
-const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvCSalon')
-const modifierRendezVous = require('./routes/rendezVous/modifierRendezVous')
+const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvSalon')
+const modifierRendezVous = require('./routes/rendezVous/modiferRendezVous')
 const prendreRendezVous = require('./routes/rendezVous/consulterRdvClient')
 
 // Routes DispoCoiffeur
@@ -57,6 +57,9 @@ const ajouterDispoSalon = require('./routes/disponibiliteSalon/ajouterDispoSalon
 const consulterDipoSalon = require('./routes/disponibiliteSalon/consulterDipoSalon')
 const deleteDispoSalon = require('./routes/disponibiliteSalon/deleteDispoSalon')
 const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSalon')
+
+const cors = require("cors")
+app.use(cors())
 
 app.use(bodyParser.json())
 

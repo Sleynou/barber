@@ -3,7 +3,7 @@ go
 use SalonCoiffure
 go
 
-CREATE LOGIN general WITH PASSWORD = '123';
+CREATE LOGIN general WITH PASSWORD = '12345678';
 use SalonCoiffure;
 CREATE USER general FOR LOGIN general;
 ALTER ROLE db_owner ADD MEMBER general;
@@ -54,8 +54,8 @@ create table Client(
     idService int not null identity(1,1),
     idSalon int not null,
     nom varchar(50) not null,
-	numTranches int not null,
     prix FLOAT,
+    duree TIME,
     CONSTRAINT PK_SERVICE PRIMARY Key (idService),
     CONSTRAINT FK_SERVICE_SALON FOREIGN KEY (idSalon) REFERENCES SalonCoiffure(idSalon)
 )
