@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 
 //Routes Client
-const registerClient = require('./routes/client/registerClient')
+const registerClient = require('./routes/client/registrerClient')
 const loginClient = require('./routes/client/loginClient')
 const modifierClient = require('./routes/client/modifierClient')
 const logoutClient = require('./routes/client/logoutClient')
