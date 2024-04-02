@@ -4,7 +4,7 @@ const db = require('../db');
 
 router.get('/RDVclient', async (req,res) =>{
     try{
-        const {iDClient} = req.body
+        const {iDClient} = req.query
 
         const verifierClient = await db.select().from('Client').where({IDclient: iDClient})
 
@@ -12,7 +12,7 @@ router.get('/RDVclient', async (req,res) =>{
             return res.status(400).json({ message: 'Le client n existe pas' });
         }
 
-        const resultats = await db('RendezVous').select().where({idClient: iDClient})
+        const resultats = await db('RendezVous').select().where({iDClient})
 
         res.status(200).json({ resultats });
     } catch(error){

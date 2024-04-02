@@ -5,7 +5,7 @@ const db = require('../db'); // Importa el módulo de conexión a la base de dat
 app.use(bodyParser.json())
 const router = express.Router()
 app.use(bodyParser.json())
-const checkBlacklist = require('./checkBlacklist')
+const checkBlacklist = require('../checkBlacklist')
 
 router.put('/modifierCoiffeur', checkBlacklist, async (req, res) => {
     try {

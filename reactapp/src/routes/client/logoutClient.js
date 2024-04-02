@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json())
 const db = require('../db')
-const checkBlacklist = require('./checkBlacklist')
+const checkBlacklist = require('../checkBlacklist')
 const router = express.Router()
 
 router.post('/logoutClient', checkBlacklist, async (req, res) => {
