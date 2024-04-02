@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
-const checkBlacklist = require('./checkBlacklist');
+const checkBlacklist = require('../checkBlacklist')
 
 
 router.get('/voirCoiffeurFavorisParidClient',checkBlacklist, async (req, res) => {

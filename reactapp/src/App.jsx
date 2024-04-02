@@ -3,9 +3,8 @@ import './App.css';
 function App() {
 
   const test = ()=>{
-      fetch('/RDVclient?iDClient=2')
+      fetch('http://localhost:3000/RDVclient?iDClient=2')
         .then( response => {
-          console.log(response);
           if(!response.ok) {
             throw new Error("Une erreur s est produite lors de la recuperation des données")
           }

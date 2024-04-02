@@ -5,9 +5,9 @@ const config = {
   client: 'mssql',
   connection: {
     user: 'general',
-    password: '123',
+    password: '12345678',
     server: 'localhost',
-    database: 'SalonCoiffure',
+    database: 'DBCoiffeur',
     options: {
       encrypt: false 
     }

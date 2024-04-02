@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
-const checkBlacklist = require('./checkBlacklist');
+const checkBlacklist = require('../checkBlacklist')
 
 // Ruta que permite a los usuarios recuperar la lista de servicios registrados con sus detalles.
 router.get('/voirServicesParidSalon',checkBlacklist, async (req, res) => {

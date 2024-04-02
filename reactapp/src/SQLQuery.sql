@@ -3,7 +3,7 @@ go
 use SalonCoiffure
 go
 
-CREATE LOGIN general WITH PASSWORD = '123';
+CREATE LOGIN general WITH PASSWORD = '12345678';
 use SalonCoiffure;
 CREATE USER general FOR LOGIN general;
 ALTER ROLE db_owner ADD MEMBER general;

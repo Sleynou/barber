@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
-const checkBlacklist = require('./checkBlacklist');
+const checkBlacklist = require('../checkBlacklist')
 
 // Route permettant aux utilisateurs salon coiffure de récupérer la liste des avis enregistrés avec leurs détails."
 router.get('/voirAvisParidSalonCoiffure',checkBlacklist, async (req, res) => {
