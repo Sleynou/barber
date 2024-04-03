@@ -8,7 +8,11 @@ const secretKey = 'your-secret-key'
 app.use(bodyParser.json())
 const router = express.Router()
 app.use(bodyParser.json())
+<<<<<<< HEAD
+const checkBlacklist = require('./checkBlacklist')
+=======
 const checkBlacklist = require('../checkBlacklist')
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
 
 router.post('/enregistrerService', checkBlacklist, async (req, res) => {
     try {

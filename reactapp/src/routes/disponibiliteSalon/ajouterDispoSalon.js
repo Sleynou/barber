@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+<<<<<<< HEAD
+const checkBlacklist = require('../checkBlacklist')
+
+router.post('/AjouterDispoSalon', checkBlacklist ,async (req,res) =>{
+=======
 
 router.post('/AjouterDispoSalon', async (req,res) =>{
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
     try{
         const {idSalon, dateDispo, ouverture, fermeture} = req.body
 
