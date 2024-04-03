@@ -1,14 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-<<<<<<< HEAD
 const checkBlacklist = require('../checkBlacklist')
 
 router.put('/ModifierDispoCoiffeur', checkBlacklist ,async (req,res) =>{
-=======
-
-router.put('/ModifierDispoCoiffeur', async (req,res) =>{
->>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
     try{
         const {idDispoC, debutShift, finShift, PauseDebut, PauseFin} = req.body
 
