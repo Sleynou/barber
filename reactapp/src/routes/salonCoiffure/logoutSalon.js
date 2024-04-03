@@ -3,7 +3,11 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json())
 const db = require('../db')
+<<<<<<< HEAD
 const checkBlacklist = require('./checkBlacklist')
+=======
+const checkBlacklist = require('../checkBlacklist')
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
 const router = express.Router()
 
 router.post('/logoutSalon', checkBlacklist, async (req, res) => {

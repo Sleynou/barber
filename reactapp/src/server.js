@@ -11,15 +11,25 @@ const logoutClient = require('./routes/client/logoutClient')
 const deleteClient = require('./routes/client/deleteClient')
 
 // Routes Salon
+<<<<<<< HEAD
 const registerSalon = require('./routes/salonCoiffure/registerSalon')
+=======
+const registerSalon = require('./routes/salonCoiffure/registrerSalon')
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
 const loginSalon = require('./routes/salonCoiffure//loginSalon')
 const modifierSalon = require('./routes/salonCoiffure//modifierSalon')
 const logoutSalon = require('./routes/salonCoiffure//logoutSalon')
 
 // Routes Coiffeur
+<<<<<<< HEAD
 const registerCoiffeur = require('./routes/coiffeur/registerCoiffeur')
 const loginCoiffeur = require('./routes/coiffeur/loginCoiffeur')
 const modifierCoiffeur = require('./routes/coiffeur/modifierCoiffeur')
+=======
+const registerCoiffeur = require('./routes/coiffeur/registrerCoiffeur')
+const loginCoiffeur = require('./routes/coiffeur/loginCoiffeur')
+const modifierCoiffeur = require('./routes/coiffeur/midifierCoiffeur')
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
 const voirCoiffeurParIDSalon = require('./routes/coiffeur/voirCoiffeurParIDSalon')
 const logoutCoiffeur = require('./routes/coiffeur/logoutCoiffeur')
 const deleteCoiffeur = require('./routes/coiffeur/deleteCoiffeur')
@@ -42,8 +52,13 @@ const deleteCoiffeurFavorisParidClientidCoiffeur = require('./routes/coiffeurFav
 //Routes RendezVous
 const consulterRdvClient = require('./routes/rendezVous/consulterRdvClient')
 const consulterRdvCoiffeur = require('./routes/rendezVous/consulterRdvCoiffeur')
+<<<<<<< HEAD
 const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvCSalon')
 const modifierRendezVous = require('./routes/rendezVous/modifierRendezVous')
+=======
+const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvSalon')
+const modifierRendezVous = require('./routes/rendezVous/modiferRendezVous')
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
 const prendreRendezVous = require('./routes/rendezVous/consulterRdvClient')
 
 // Routes DispoCoiffeur
@@ -58,6 +73,12 @@ const consulterDipoSalon = require('./routes/disponibiliteSalon/consulterDipoSal
 const deleteDispoSalon = require('./routes/disponibiliteSalon/deleteDispoSalon')
 const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSalon')
 
+<<<<<<< HEAD
+=======
+const cors = require("cors")
+app.use(cors())
+
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
 app.use(bodyParser.json())
 
 app.use('/', registerClient)

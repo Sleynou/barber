@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+<<<<<<< HEAD
 const checkBlacklist = require('../checkBlacklist')
 
 router.delete('/DeleteDispoCoiffeur', checkBlacklist ,async (req,res) =>{
+=======
+
+router.delete('/DeleteDispoCoiffeur', async (req,res) =>{
+>>>>>>> d75c357efa16d55ef0fd38f3faf8568396aacfc4
     try{
         const {idDispoC} = req.body
 
