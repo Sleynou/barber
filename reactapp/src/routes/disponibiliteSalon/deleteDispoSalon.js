@@ -13,7 +13,7 @@ router.delete('/DeleteDispoSalon',checkBlacklist,  async (req,res) =>{
             return res.status(400).json({ message: 'Le dispoC n existe pas' });
         }
 
-        await db('DisponibiliteSalon').delete().where({ididDispoSDispoC})
+        await db('DisponibiliteSalon').delete().where({idDispoS})
 
         res.status(200).json({ message: "Dispo effacee  avec succes" });
     } catch(error){

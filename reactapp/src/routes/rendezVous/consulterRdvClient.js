@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const checkBlacklist = require('../checkBlacklist')
 
-router.get('/RDVclient', async (req,res) =>{
+router.get('/RDVclient',checkBlacklist,  async (req,res) =>{
     try{
         const {iDClient} = req.query
 
