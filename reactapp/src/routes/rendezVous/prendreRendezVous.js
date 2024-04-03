@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const checkBlacklist = require('../checkBlacklist');
 
-router.post('/prendreRDV', async (req,res) =>{
+router.post('/prendreRDV',checkBlacklist, async (req,res) =>{
     try{
         const {idRDV, idSalonCoiffure, idClient, idService, idCoiffeur, dateRDV, heure} = req.body
 

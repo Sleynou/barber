@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const checkBlacklist = require('../checkBlacklist')
 
-router.get('/RDVSalon', async (req,res) =>{
+router.get('/RDVSalon',checkBlacklist, async (req,res) =>{
     try{
         const {idSalon} = req.body
 
