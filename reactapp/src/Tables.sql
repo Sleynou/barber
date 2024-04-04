@@ -1,6 +1,5 @@
 -- SQLite
 --Travail fait par Jorge/Alejandro
-
 -- Create a new table called 'Avis' in schema '
 -- Drop the table if it already exists
 IF OBJECT_ID('Avis', 'U') IS NOT NULL
@@ -34,7 +33,7 @@ GO
     IDclient integer PRIMARY KEY AUTOINCREMENT,
     PrenomClient varchar(50) not null,
     NomClient varchar(50) not null,
-    Email varchar(50) not null,
+    Email varchar(50) not null unique ,
     MotDePasse varchar(128) not null
 )
 
@@ -47,7 +46,7 @@ create table Coiffeur
     IDSalon INTEGER,
     PrenomCoiffeur varchar(50) not null,
     NomCoiffeur varchar(50) not null,
-    Email varchar(50) not null,
+    Email varchar(50) not null unique,
     PhotoCoiffeur varchar(50),
     MotDePasse varchar(128) not null,
     FOREIGN KEY(idSalon) REFERENCES SalonCoiffure(idSalon)
@@ -107,7 +106,7 @@ create table SalonCoiffure
     telephoneSalon varchar(50) not null,
     adresse varchar(50) not null,
     bio text,
-    Email varchar(50) not null,
+    Email varchar(50) not null UNIQUE,
     MotDePasse varchar(128) not null
 )
 
@@ -120,7 +119,7 @@ create table Services
     nom varchar(50) not null,
     prix FLOAT,
     duree TIME,
-    CONSTRAINT FK_SERVICE_SALON FOREIGN KEY(idSalon) REFERENCES SalonCoiffure(idSalon)
+    FOREIGN KEY(idSalon) REFERENCES SalonCoiffure(idSalon)
 )
 
 ------------------------------------------------------------------------------------------------------------------------------------

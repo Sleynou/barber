@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs')
 
 router.post('/registerCoiffeur', async (req, res) => {
     try {
-        const { UsernameCoiffeur, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, MotDePasse } = req.body;
-        const user = await getUserCoiffeurByUsername(UsernameCoiffeur);
+        const { Email, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, MotDePasse } = req.body;
+        const user = await getUserCoiffeurByUsername(Email);
         
         if (user) {
             return res.status(400).json({ message: 'El username ya existe' });
@@ -15,7 +15,7 @@ router.post('/registerCoiffeur', async (req, res) => {
         // Hasher le mot de passe
         const hashedPassword = await bcrypt.hash(MotDePasse, 10)
 
-        await insertUserCoiffeur(UsernameCoiffeur, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, hashedPassword);
+        await insertUserCoiffeur(Email, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, hashedPassword);
         res.status(200).json({ message: 'Cliente registrado exitosamente' });
     } catch (error) {
         console.error(error);
@@ -23,9 +23,9 @@ router.post('/registerCoiffeur', async (req, res) => {
     }
 });
 
-async function getUserCoiffeurByUsername(UsernameCoiffeur) {
+async function getUserCoiffeurByUsername(Email) {
     try {
-        const user = await db('Coiffeur').where({ UsernameCoiffeur }).first()
+        const user = await db('Coiffeur').where({ Email }).first()
         return user
       } catch (error) {
         console.error(error)
@@ -33,9 +33,9 @@ async function getUserCoiffeurByUsername(UsernameCoiffeur) {
       }
 }
 
-async function insertUserCoiffeur(UsernameCoiffeur, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, MotDePasse) {
+async function insertUserCoiffeur(Email, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, MotDePasse) {
     try {
-        await db('Coiffeur').insert({ UsernameCoiffeur, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, MotDePasse })
+        await db('Coiffeur').insert({ Email, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, MotDePasse })
       } catch (error) {
         console.error('Erreur lors de l\'insertion de l\'utilisateur dans la base de données:', error)
         throw new Error({ message: 'Erreur lors de l\'insertion de l\'utilisateur dans la base de données' })

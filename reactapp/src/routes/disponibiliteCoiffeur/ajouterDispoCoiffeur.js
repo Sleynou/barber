@@ -7,9 +7,9 @@ router.post('/AjouterDispoCoiffeur',checkBlacklist ,async (req,res) =>{
     try{
         const {idCoiffeur, idDispoS, debutShift, finShift, PauseDebut, PauseFin} = req.body
 
-        const verifierDispoC = await db.select().from('DisponibiliteCoiffeur').where({debutShift: debutShift, finShift: finShift})
+        const verifierDispoC = await db.select().from('DisponibiliteCoiffeur').where({idDispoS: idDispoS, idCoiffeur: idCoiffeur})
 
-        if(!verifierDispoC.length){
+        if(! (verifierDispoC.length === 0)){
             return res.status(400).json({ message: 'La dispo existe deja' });
         }
 

@@ -5,15 +5,15 @@ const checkBlacklist = require('../checkBlacklist');
 
 router.post('/prendreRDV',checkBlacklist, async (req,res) =>{
     try{
-        const {idRDV, idSalonCoiffure, idClient, idService, idCoiffeur, dateRDV, heure} = req.body
+        const {idSalonCoiffure, idClient, idService, idCoiffeur, dateRDV, heure} = req.body
 
         const verifierRDV = await db.select().from('RendezVous').where({dateRDV: dateRDV, heure: heure})
 
-        if(!verifierRDV.length){
+        if(!verifierRDV.length===0){
             return res.status(400).json({ message: 'Le rdv existe deja' });
         }
 
-        await db('RendezVous').insert({idRDV, idSalonCoiffure, idClient, idService, idCoiffeur, dateRDV, heure})
+        await db('RendezVous').insert({idSalonCoiffure, idClient, idService, idCoiffeur, dateRDV, heure})
 
         res.status(200).json({ message: ' Rdv pris avec succès' });
     } catch(error){

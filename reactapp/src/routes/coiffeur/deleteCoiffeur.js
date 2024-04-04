@@ -9,16 +9,16 @@ const checkBlacklist = require('../checkBlacklist')
 
 router.delete('/deleteCoiffeur', checkBlacklist, async (req, res) => {
     try {
-        const { UsernameCoiffeur } = req.body;
+        const { Email } = req.body;
         
         // Verificar si el servicio con el ID proporcionado existe en la base de datos
-        const existingCoiffeur = await db('Coiffeur').where({ UsernameCoiffeur }).first();
+        const existingCoiffeur = await db('Coiffeur').where({ Email }).first();
         if (!existingCoiffeur) {
             return res.status(404).json({ error: "Le coiffeur n'existe pas" });
         }
 
         // Eliminar el servicio de la base de datos
-        await db('Coiffeur').where({ UsernameCoiffeur }).del();
+        await db('Coiffeur').where({ Email }).del();
 
         res.status(200).json({ message: 'Coiffeur supprimé avec succès' });
     } catch (error) {
