@@ -9,7 +9,7 @@ router.post('/AjouterDispoSalon', checkBlacklist ,async (req,res) =>{
 
         const verifierDispoS = await db.select().from('DisponibiliteSalon').where({dateDispo, idSalon})
 
-        if(!verifierDispoS.length){
+        if(!verifierDispoS.length===0){
             return res.status(400).json({ message: 'La dispo existe deja' });
         }
 

@@ -9,16 +9,16 @@ const checkBlacklist = require('../checkBlacklist')
 
 router.put('/modifierCoiffeur', checkBlacklist, async (req, res) => {
     try {
-        const { UsernameCoiffeur, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur} = req.body;
+        const { Email, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur} = req.body;
         
-        // Vérifier si le UsernameCoiffeur fourni existe dans la base de données.
-        const existingCoiffeur = await db('Coiffeur').where({ UsernameCoiffeur }).first();
+        // Vérifier si le Email fourni existe dans la base de données.
+        const existingCoiffeur = await db('Coiffeur').where({ Email }).first();
         if (!existingCoiffeur) {
             return res.status(404).json({ error: "Le(a) Coiffeur(euse) n'existe pas" });
         }
 
         // Modifier les données du(e la) coiffeur-euse
-        await db('Coiffeur').where({ UsernameCoiffeur}).update({ IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur });
+        await db('Coiffeur').where({ Email}).update({ IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur });
 
         res.status(200).json({ message: 'Coiffeur(euse) modifié(e) avec succès' });
     } catch (error) {

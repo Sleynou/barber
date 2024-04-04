@@ -7,7 +7,7 @@ const checkBlacklist = require('../checkBlacklist')
 router.get('/voirCoiffeurFavorisParidClient',checkBlacklist, async (req, res) => {
   try {
     const { idClient } = req.body;
-    const listeCoiffeursFavoris = await db('CoiffeurFavoris').select('*').where({ idClient: idClient }); 
+    const listeCoiffeursFavoris = await db('CoiffeurFavoris').select('Coiffeur.*').join('Coiffeur', 'CoiffeurFavoris.idCoiffeur', 'Coiffeur.iDCoiffeur').where({ idClient: idClient }); 
     res.send(listeCoiffeursFavoris);
   } catch (error) {
     console.error('Erreur lors de la récupération des données de la base de données:', error);

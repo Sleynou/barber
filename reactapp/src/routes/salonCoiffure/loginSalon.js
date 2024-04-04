@@ -11,11 +11,11 @@ const router = express.Router()
 
 router.post('/loginSalon', async (req, res) => {
     try {
-      const { UsernameSalon, MotDePasse } = req.body
-      console.log(UsernameSalon,MotDePasse)///////////////////////////////////////////////////////////////
+      const { Email, MotDePasse } = req.body
+      console.log(Email,MotDePasse)///////////////////////////////////////////////////////////////
   
       // Récupérer l'utilisateur depuis la base de données
-      const user = await getUserSalonByUsername(UsernameSalon)
+      const user = await getUserSalonByUsername(Email)
        console.log(user)////////////////////////////////////////////////////////////////////////////////////
       if (!user) {
         return res.status(401).json({ message: 'L\'utilisateur n\'a pas été trouvé' })
@@ -28,7 +28,7 @@ router.post('/loginSalon', async (req, res) => {
   
       // Générer un token JWT
       const expiresInSeconds = 12000
-      const token = jwt.sign({ UsernameSalon }, secretKey, { expiresIn: expiresInSeconds })
+      const token = jwt.sign({ Email }, secretKey, { expiresIn: expiresInSeconds })
   
       // Obtenir la date actuelle
       const now = new Date()
@@ -48,9 +48,9 @@ router.post('/loginSalon', async (req, res) => {
 
 
 
-  async function getUserSalonByUsername(UsernameSalon) {
+  async function getUserSalonByUsername(Email) {
     try {
-        const user = await db('SalonCoiffure').where({ UsernameSalon }).first()
+        const user = await db('SalonCoiffure').where({ Email }).first()
         return user
       } catch (error) {
         console.error(error)

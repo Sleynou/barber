@@ -9,7 +9,7 @@ const checkBlacklist = require('../checkBlacklist')
 
 router.put('/modifierService', checkBlacklist, async (req, res) => {
     try {
-        const { idService, idSalon, nom, numTranches, prix } = req.body;
+        const { idService, idSalon, nom, duree, prix } = req.body;
         
         // Verificar si el servicio con el ID proporcionado existe en la base de datos
         const existingService = await db('Services').where({ idService }).first();
@@ -18,7 +18,7 @@ router.put('/modifierService', checkBlacklist, async (req, res) => {
         }
 
         // Modificar los datos del servicio
-        await db('Services').where({ idService }).update({ idSalon, nom, numTranches, prix });
+        await db('Services').where({ idService }).update({ idSalon, nom, duree, prix });
 
         res.status(200).json({ message: 'Service modifié avec succès' });
     } catch (error) {

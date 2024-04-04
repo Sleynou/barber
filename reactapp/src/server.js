@@ -44,7 +44,7 @@ const consulterRdvClient = require('./routes/rendezVous/consulterRdvClient')
 const consulterRdvCoiffeur = require('./routes/rendezVous/consulterRdvCoiffeur')
 const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvSalon')
 const modifierRendezVous = require('./routes/rendezVous/modiferRendezVous')
-const prendreRendezVous = require('./routes/rendezVous/consulterRdvClient')
+const prendreRendezVous = require('./routes/rendezVous/prendreRendezVous')
 
 // Routes DispoCoiffeur
 const ajouterDispoCoiffeur = require('./routes/disponibiliteCoiffeur/ajouterDispoCoiffeur')

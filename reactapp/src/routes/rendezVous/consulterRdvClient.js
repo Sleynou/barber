@@ -5,7 +5,7 @@ const checkBlacklist = require('../checkBlacklist')
 
 router.get('/RDVclient',checkBlacklist,  async (req,res) =>{
     try{
-        const {iDClient} = req.query
+        const {iDClient} = req.body
 
         const verifierClient = await db.select().from('Client').where({IDclient: iDClient})
 
@@ -13,7 +13,7 @@ router.get('/RDVclient',checkBlacklist,  async (req,res) =>{
             return res.status(400).json({ message: 'Le client n existe pas' });
         }
 
-        const resultats = await db('RendezVous').select().where({iDClient})
+        const resultats = await db('RendezVous').select().where({idClient: iDClient})
 
         res.status(200).json({ resultats });
     } catch(error){

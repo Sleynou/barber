@@ -9,16 +9,16 @@ const checkBlacklist = require('../checkBlacklist')
 
 router.put('/modifierClient', checkBlacklist, async (req, res) => {
     try {
-        const { UsernameClient, PrenomClient, NomClient, Email} = req.body;
+        const { PrenomClient, NomClient, Email} = req.body;
         
         // Vérifier si le UsernameClinet fourni existe dans la base de données.
-        const existingClient = await db('Client').where({ UsernameClient }).first();
+        const existingClient = await db('Client').where({ Email }).first();
         if (!existingClient) {
             return res.status(404).json({ error: "Le client n'existe pas" });
         }
 
         // Modifier les données du client
-        await db('Client').where({ UsernameClient}).update({ PrenomClient, NomClient, Email });
+        await db('Client').where({ Email}).update({ PrenomClient, NomClient, Email });
 
         res.status(200).json({ message: ' Client modifié avec succès' });
     } catch (error) {

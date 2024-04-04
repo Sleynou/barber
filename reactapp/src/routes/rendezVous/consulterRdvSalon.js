@@ -7,7 +7,7 @@ router.get('/RDVSalon',checkBlacklist, async (req,res) =>{
     try{
         const {idSalon} = req.body
 
-        const verifierSalon = await db.select().from('SalonCoiffure').where({idSalon: idSalon})
+        const verifierSalon = await db.select().from('SalonCoiffure').where({idSalon})
 
         if(verifierSalon.length === 0){
             return res.status(400).json({ message: 'Le salon n existe pas' });
