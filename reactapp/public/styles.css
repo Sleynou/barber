@@ -21,7 +21,7 @@
   text-decoration: none;
 }
 
-/* Add a red background color to navbar links on hover */
+
 .navbar a:hover,
 .dropdown:hover {
   background-color: red;
@@ -87,7 +87,6 @@ header .container {
   text-decoration: none;
 }
 
-/* Add a red background color to navbar links on hover */
 .navbar a:hover,
 .dropdown:hover {
   background-color: red;
@@ -346,174 +345,6 @@ main h2 {
   color: black;
 }
 
-.li-calendar {
-	list-style: none;
-}
-  
-.ul-calendar {
-	margin: 0;
-	padding: 0;
-}
-  
-.calendar-container {
-	display: grid;
-	grid-template-columns: 50px auto;
-	grid-template-rows: auto;
-	gap: 1px 1px;
-	grid-template-areas:
-	  ". header-calendar"
-	  "timeslots-container main";
-  box-shadow: 2px 2px 30px black;;
-  border: black;
-}
-  
-.weekdays,
-.daynumbers {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-}
-  
-.weekdays {
-	background: rgb(83, 83, 83);
-	color: whitesmoke;
-}
-  
-.daynumbers {
-	background: rgb(194, 194, 194);
-	min-height: 2em;
-}
-  
-.daynumbers li {
-	border-right: 1px solid black;
-}
-  
-.header-calendar {
-	background: rgb(224, 189, 156);
-	grid-area: header-calendar;
-}
-  
-.timeslots-container {
-	background: lightblue;
-	grid-area: timeslots-container;
-	justify-items: left;
-}
-  
-.timeslots {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-  
-.timeslots li {
-	min-height: 60px;
-}
-  
-.timeslots li::after {
-	content: "";
-	position: absolute;
-	left: 0px;
-	width: 100%;
-	height: 1px;
-	background: #afafaf;
-	z-index: 1;
-}
-  
-.event-container {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-	grid-template-rows: repeat(9, 1fr);
-	background: rgb(222, 223, 231);
-	grid-area: main;
-	position: relative;
-	white-space: nowrap;
-	background: repeating-linear-gradient(
-	  gray 14.3%
-	);
-}
-  
-.event-name {
-	overflow: hidden;
-	color: #fff;
-	display: flex;
-	align-items: center;
-	font-size: 12px;
-	letter-spacing: 0.1px;
-	line-height: 15px;
-}
-  
-.slot {
-	position: absolute;
-	background: rgb(66, 147, 223);
-	border-radius: 5px;
-	z-index: 2;
-	margin-top: 1px;
-	border-color: rgb(3, 155, 229);
-	outline: none;
-}
-  
-.slot::before {
-	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
-	  0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
-	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
-	  0 3px 5px -1px rgba(0, 0, 0, 0.2);
-	opacity: 0;
-	transition: opacity 100ms linear;
-}
-  
-.slot::after {
-	position: absolute;
-	top: -1px;
-	left: -1px;
-	width: -webkit-calc(100% + 2px);
-	width: calc(100% + 2px);
-	height: -webkit-calc(100% + 2px);
-	height: calc(100% + 2px);
-	content: "";
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	pointer-events: none;
-	border: 1px solid #fff;
-}
-  
-.event-status {
-	float: left;
-	border-left: 3px solid rgb(71, 235, 93);
-	height: 100%;
-}
-  
-.slot-1 {
-	height: 45px;
-	grid-row: 17;
-	grid-column: 1;
-}
-  
-.slot-2 {
-	height: 45px;
-}
-  
-.slot-3 {
-	height: 75px;
-}
-  
-.slot-4 {
-	color: red;
-}
-  
-.on-resize {
-	opacity: 0.85;
-}
-  
-.gridcell::after {
-	content: "";
-	border-right: #dadce0 1px solid;
-	position: relative;
-	-webkit-box-flex: 1 1 auto;
-	height: 200%;
-}
-
-
 .salonContainer {
 	max-width: 80%;
 	margin: 0 auto;
@@ -613,7 +444,7 @@ button:hover{
 }
 	
 .navbarSalon a:hover{
-	transform: translateY(-2px);
+	transform: translateY(-4px);
 }
 
 .cardProfilClient {
@@ -690,7 +521,7 @@ button:hover{
   background-color:rgba(0, 0, 0, 0.24);
   color: #F5F5F5;
   box-shadow: 2px 2px 30px black;
-  transition: transform 0.6s;
+  transition: transform 0.5s;
 }
 .avis:hover{
   transform: translateY(-2px);
@@ -827,6 +658,11 @@ padding: 10px;
 .avisTitre{
   display: flex;
   flex-direction: column;
+  font-size: 40px;
+  color: white;
+  font-weight: 400;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px rgb(0, 0, 255);
+  padding-bottom: 10px;
 }
 .nameUser{
   font-size: 12px;
@@ -844,4 +680,60 @@ padding: 10px;
 }
 .commentaires .rating{
   font-size: 20px;
+}
+
+.heart {
+  color: red;
+	cursor: pointer;
+}
+.heart .heart.active {
+	opacity: 0;
+	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+.divSalonFavoris {
+  width: 413px;
+  transition: transform 0.5s;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+.divSalonFavoris:hover {
+	transform: translateY(-4px);
+}
+.divSalonFavoris h2{
+	text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
+               1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+}
+.divSalonFavoris p{
+	color: white;
+  font-size: 12px;
+
+}
+
+.salonFlexFavoris{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+#titrePage {
+  font-size: 40px;
+  color: white;
+  font-weight: 400;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px rgb(0, 0, 255);
+  text-align: center;
+  padding-top: 10px;
+  height: 80px;
+}
+
+#tiret{
+  color: white;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px rgb(255, 255, 255);
 }
