@@ -22,10 +22,10 @@
               <img id="logo" src="/reactapp/public/img/logo.png" alt="logo"/>
               <div class="container">
                 <div>
-                    <a href="/reactapp/public/coiffeur/acceuilCoiffeur.html">Accueil</a>
-                    <a href="/reactapp/public/coiffeur/profileCoiffeur.html">Profil</a>
-                    <a href="/reactapp/public/coiffeur/historiqueCoiffeur.html">Historique</a>
-                    <a href="/reactapp/public/coiffeur/rendezvousCoiffeur.html">A venir</a>
+                  <a href="/reactapp/public/coiffeur/accueilCoiffeur.html">Horraire</a>
+                  <a href="/reactapp/public/coiffeur/profileCoiffeur.html">Profil</a>
+                  <a href="/reactapp/public/coiffeur/historiqueCoiffeur.html">Historique</a>
+                  <a href="/reactapp/public/coiffeur/rendezvousCoiffeur.html">A venir</a>
                 </div>
   
               <div id="connexionDeconnexion">
@@ -43,14 +43,14 @@
           </header>
       </div>
     </div>
-    <main>
+    <main class="mainConnexion">
 
         <div class="FormContainer">
-            <form class="formulaire" action="">
+            <form class="formulaire" action="/loginClient" method="get">
                 <h1>Connexion</h1>
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                      <input class="input" type="email" placeholder="Email">
+                      <input class="input" type="email" placeholder="Email" id="UsernameCoiffeur">
                       <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                       </span>
@@ -61,7 +61,7 @@
                   </div>
                   <div class="field">
                     <p class="control has-icons-left">
-                      <input class="input" type="password" placeholder="Password">
+                      <input class="input" type="password" placeholder="Password" id="MotDePasse">
                       <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                       </span>
@@ -72,11 +72,7 @@
                         SE CONNECTER
                       </button>
                   </div>
-                <div class="pasInscrit">
-                    <p>Pas encore inscrit ?
-                    <a href="/reactapp/public/coiffeur/inscriptionCoiffeur.html"> inscription</a></p>
-                </div>
-
+        
             </form>
 
         </div>
@@ -98,7 +94,7 @@
               </address>
               <div class="flex-logo">
                 <img class="logo2" src="/reactapp/public/img/facebook.png" alt="facebook" />
-                <img id="logo2-insta" src="/reactapp/public/img/img/instagram.png" alt="instagram" />
+                <img id="logo2-insta" src="/reactapp/public/img/instagram.png" alt="instagram" />
                 <img class="logo2" src="/reactapp/public/img/linkedin.png" alt="linkedin" />
               </div>
             </div>

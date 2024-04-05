@@ -22,14 +22,13 @@
               <img id="logo" src="/reactapp/public/img/logo.png" alt="logo"/>
               <div class="container">
                 <div>
-                    <a href="/reactapp/public/coiffeur/acceuilCoiffeur.html">Accueil</a>
-                    <a href="/reactapp/public/coiffeur/profileCoiffeur.html">Profil</a>
-                    <a href="/reactapp/public/coiffeur/historiqueCoiffeur.html">Historique</a>
-                    <a href="/reactapp/public/coiffeur/rendezvousCoiffeur.html">A venir</a>
+                  <a href="./accueilSalon.html">inscription des coiffeurs</a>
+                  <a href="./ajouterSalon.html">ajouter des salons</a>
+  
                 </div>
   
               <div id="connexionDeconnexion">
-                <a id="connexion" href="/reactapp/public/coiffeur/connexionCoiffeur.html">Connexion</a>
+                <a id="connexion" href="/reactapp/public/salon/connexionSalon.html">Connexion</a>
                 <a id="deconnexion" href="/reactapp/public/Accueil.html">Deconnexion</a>
               </div>
   
@@ -43,11 +42,11 @@
           </header>
       </div>
     </div>
-    <main>
+    <main class="mainConnexion">
 
         <div class="FormContainer">
             <form class="formulaire" action="">
-                <h1>Inscription</h1>
+                <h1>Connexion</h1>
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
                       <input class="input" type="email" placeholder="Email">
@@ -69,9 +68,13 @@
                   </div>
                   <div class="field">
                       <button type ="submit" class="btnConnexion">
-                        CRÉER MON COMPTE
+                        SE CONNECTER
                       </button>
                   </div>
+                <div class="pasInscrit">
+                    <p>Pas encore inscrit ?
+                    <a href="/reactapp/public/client/inscriptionClient.html"> inscription</a></p>
+                </div>
 
             </form>
 
@@ -79,6 +82,7 @@
 
 
     </main>
+
     <footer>
         <div class="container">
           <div class="flex-contact">
@@ -93,8 +97,8 @@
               </address>
               <div class="flex-logo">
                 <img class="logo2" src="/reactapp/public/img/facebook.png" alt="facebook" />
-                <img id="logo2-insta" src="/reactapp/public/img/instagram.png" alt="instagram" />
-                <img class="logo2" src="/reactapp/public/img/linkedin.png" alt="linkedin" />
+                <img id="logo2-insta" src="/reactapp/public/img/img/instagram.png" alt="facebook" />
+                <img class="logo2" src="/reactapp/public/img/linkedin.png" alt="facebook" />
               </div>
             </div>
             <div class="flex-map">

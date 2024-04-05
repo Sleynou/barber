@@ -39,6 +39,7 @@ router.post('/loginClient', async (req, res) => {
       const expirationDateTime = expirationDate.toLocaleDateString() + ' ' + expirationTime
   
       res.json({ message: 'Connexion réussie', token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
+      res.redirect('/reactapp/public/coiffeur/acceuilCoiffeur.html');
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: 'Une erreur est survenue' })
