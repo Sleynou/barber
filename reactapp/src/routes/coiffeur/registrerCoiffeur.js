@@ -17,6 +17,7 @@ router.post('/registerCoiffeur', async (req, res) => {
 
         await insertUserCoiffeur(UsernameCoiffeur, IDSalon, PrenomCoiffeur, NomCoiffeur, PhotoCoiffeur, hashedPassword);
         res.status(200).json({ message: 'Cliente registrado exitosamente' });
+        res.redirect('/reactapp/public/coiffeur/acceuilCoiffeur.html');
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Ocurrió un error' });
