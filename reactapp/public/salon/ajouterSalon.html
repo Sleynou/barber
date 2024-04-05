@@ -8,11 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="stylesheet" href="/reactapp/public/styles.css" />
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
 </head>
-
-
-
-
 <body>
   <div>
     <div>
@@ -21,16 +18,13 @@
           <img id="logo" src="/reactapp/public/img/logo.png" alt="logo" />
           <div class="container">
             <div>
-              <a href="/reactapp/public/coiffeur/accueilCoiffeur.html">Horraire</a>
-              <a href="/reactapp/public/coiffeur/profileCoiffeur.html">Profil</a>
-              <a href="/reactapp/public/coiffeur/historiqueCoiffeur.html">Historique</a>
-              <a href="/reactapp/public/coiffeur/rendezvousCoiffeur.html">A venir</a>
-              <a href="/reactapp/public/coiffeur/avisCoiffeur.html">Avis</a>
-              <a href="/reactapp/public/coiffeur/disponibiliteCoiffeur.html">Disponibilité</a>
+              <a href="./accueilSalon.html">inscription des coiffeurs</a>
+              <a href="./ajouterSalon.html">ajouter des salons</a>
+
             </div>
 
             <div id="connexionDeconnexion">
-              <a id="connexion" href="/reactapp/public/coiffeur/connexionCoiffeur.html">Connexion</a>
+              <a id="connexion" href="/reactapp/public/salon/connexionSalon.html">Connexion</a>
               <a id="deconnexion" href="/reactapp/public/Accueil.html">Deconnexion</a>
             </div>
 
@@ -38,59 +32,42 @@
         </div>
         <div class="menu-header">
           <div>
-            <h1 id="titre">EL BARBER <span id="tiret">-</span> <span id="titrePage">HORRAIRE</span></h1>
+            <h1 id="titre">EL BARBER <span id="tiret">-</span> <span id="titrePage">AJOUT DES SALONS</span></h1>
           </div>
         </div>
       </header>
     </div>
   </div>
   <main>
-    <div class="container">
-      <div class="calendar-container">
+    
+    <div class="card-container2">
+      <div class="card">
+        <form id="post-form" action="#">
+          <div>
+            <label for="nom-salon">Nom du salon :</label>
+            <input type="text" id="nom-salon" name="nom-salon" required>
+          </div>
 
-        <div class="header">
-          <ul class="weekdays">
-            <li>Lundi</li>
-            <li>Mardi</li>
-            <li>Mercredi</li>
-            <li>Jeudi</li>
-            <li>Vendredi</li>
-            <li>Samedi</li>
-            <li>Dimanche</li>
-          </ul>
-          <ul class="daynumbers">
-            <li>20</li>
-            <li>21</li>
-            <li>22</li>
-            <li>23</li>
-            <li>24</li>
-            <li>25</li>
-            <li>26</li>
-          </ul>
-        </div>
-
-        <div class="timeslots-container">
-          <ul class="timeslots">
-            <li>9:00<sup>am</sup>
-            <li>10:00<sup>am</sup>
-            <li>11:00<sup>am</sup>
-            <li>12:00<sup>am</sup>
-            <li>1:00<sup>pm</sup>
-            <li>2:00<sup>pm</sup>
-            <li>3:00<sup>pm</sup>
-            <li>4:00<sup>pm</sup>
-            <li>5:00<sup>pm</sup>
-          </ul>
-        </div>
-
-        <div class="event-container">
-
-        </div>
-
+      <div>
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required></textarea>
       </div>
-    </div>
-  </main>
 
+      <div>
+        <label for="image">Image :</label>
+          <input type="file" id="image" name="image" accept="image/*" required>
+      </div>
+          <div class="btn-group">
+            <button type="submit" class="btn submit">Submit</button>
+            <button class="btn cancel">Cancel</button>
+          </div>
+        </form>
+        </div>
+
+      
+    </div>
+
+  </main>
   <footer>
     <div class="container">
       <div class="flex-contact">
@@ -119,7 +96,7 @@
     </div>
   </footer>
 
-  <script src="/reactapp/src/server.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
