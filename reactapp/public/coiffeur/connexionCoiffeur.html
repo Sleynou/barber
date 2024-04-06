@@ -26,18 +26,20 @@
                   <a href="/reactapp/public/coiffeur/profileCoiffeur.html">Profil</a>
                   <a href="/reactapp/public/coiffeur/historiqueCoiffeur.html">Historique</a>
                   <a href="/reactapp/public/coiffeur/rendezvousCoiffeur.html">A venir</a>
+                  <a href="/reactapp/public/coiffeur/avisCoiffeur.html">Avis</a>
+                  <a href="/reactapp/public/coiffeur/disponibiliteCoiffeur.html">Disponibilité</a>
                 </div>
   
               <div id="connexionDeconnexion">
                 <a id="connexion" href="/reactapp/public/coiffeur/connexionCoiffeur.html">Connexion</a>
-                <a id="deconnexion" href="/reactapp/public/Accueil.html">Deconnexion</a>
+                <a id="deconnexion" href="/reactapp/public/Accueil.html" onclick="logoutCoiffeur">Deconnexion</a>
               </div>
   
               </div>
             </div>
             <div class="menu-header">
               <div>
-                <h1 id="titre">EL BARBER</h1>
+                <h1 id="titre">EL BARBER <span id="tiret">-</span> <span id="titrePage">CONNEXION</span></h1>
               </div>
             </div>
           </header>
@@ -46,29 +48,26 @@
     <main class="mainConnexion">
 
         <div class="FormContainer">
-            <form class="formulaire" action="/loginClient" method="get">
+            <form class="formulaire">
                 <h1>Connexion</h1>
                 <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                      <input class="input" type="email" placeholder="Email" id="UsernameCoiffeur">
+                  <p class="control has-icons-left">
+                      <input class="input" type="text" placeholder="Nom d'utilisateur" id="UsernameCoiffeur">
                       <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-user"></i>
                       </span>
-                      <span class="icon is-small is-right">
-                        <i class="fas fa-check"></i>
-                      </span>
-                    </p>
-                  </div>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control has-icons-left">
+                    <input class="input" type="password" placeholder="Password" id="MotDePasse">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                </div>
                   <div class="field">
-                    <p class="control has-icons-left">
-                      <input class="input" type="password" placeholder="Password" id="MotDePasse">
-                      <span class="icon is-small is-left">
-                        <i class="fas fa-lock"></i>
-                      </span>
-                    </p>
-                  </div>
-                  <div class="field">
-                      <button type ="submit" class="btnConnexion">
+                      <button type ="submit" class="btnConnexion" id="btnConnexion">
                         SE CONNECTER
                       </button>
                   </div>
@@ -113,6 +112,6 @@
         </div>
       </footer>
   
-      <script src="script.js"></script>
+      <script src="/reactapp/src/routes/coiffeur/loginCoiffeur.js"></script>
     </body>
   </html>
