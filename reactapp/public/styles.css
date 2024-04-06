@@ -33,6 +33,7 @@ header .container {
   justify-content: space-between;
 }
 .FormContainer {
+  color: white;
   width: 350px;
   background: transparent;
   border-radius: 10px;
@@ -110,7 +111,7 @@ main {
 }
 
 body {
-  background-image: url(/reactapp/public/img/backgroundlogin.jpg);
+  background-image: url(img/backgroundlogin.jpg);
 }
 .mainConnexion {
   width: 100%;
@@ -415,16 +416,16 @@ button:hover{
 	transition: transform 0.5s;
 }
 .c1{
-	background-image: url("/reactapp/public/img/b1.png");
+	background-image: url("img/b1.png");
 }
 .c2{
-	background-image: url("/reactapp/public/img/b2.png");
+	background-image: url("img/b2.png");
 }
 .c3{
-	background-image: url("/reactapp/public/img/b3.png");
+	background-image: url("img/b3.png");
 }
 .c4{
-	background-image: url("/reactapp/public/img/b4.png");
+	background-image: url("img/b4.png");
 }
 
 
@@ -982,9 +983,10 @@ sup {
 
 #post-form{
   padding: 20px;
-  
+
 }
-#nom-salon {
+.card-container2 input {
+  margin-left: 5px;
   background-color: #ffffffd5;
   padding: 5px;
   border-radius: 0.5rem;
@@ -992,6 +994,19 @@ sup {
   outline: none;
   resize: none;
   margin-bottom: 0.5rem;
+}
+
+#image{
+  border:none;
+  margin-left: 0px;
+  border-radius: 0px;
+  padding: 0px;
+}
+#telephoneSalon{
+  margin-left: 47px;
+}
+#adresse{
+  margin-left: 51px;
 }
 .card form div {
   margin-top: 10px;
