@@ -21,7 +21,7 @@
   text-decoration: none;
 }
 
-/* Add a red background color to navbar links on hover */
+
 .navbar a:hover,
 .dropdown:hover {
   background-color: red;
@@ -33,6 +33,7 @@ header .container {
   justify-content: space-between;
 }
 .FormContainer {
+  color: white;
   width: 350px;
   background: transparent;
   border-radius: 10px;
@@ -57,12 +58,18 @@ header .container {
 }
 .formulaire h1 {
   color: white;
+  font-size: 30px;
 }
+
+
 .field input::placeholder,
 .pasInscrit p {
   color: white;
 }
 
+.formulaire .field{
+  margin-top: 25px;
+}
 .field .btnConnexion {
   width: 100%;
   height: 45px;
@@ -87,7 +94,6 @@ header .container {
   text-decoration: none;
 }
 
-/* Add a red background color to navbar links on hover */
 .navbar a:hover,
 .dropdown:hover {
   background-color: red;
@@ -105,7 +111,7 @@ main {
 }
 
 body {
-  background-image: url(/reactapp/public/img/backgroundlogin.jpg);
+  background-image: url(img/backgroundlogin.jpg);
 }
 .mainConnexion {
   width: 100%;
@@ -115,9 +121,7 @@ body {
   background-position: center;
   background-size: cover;
 }
-.has-background-primary-light {
-  background-color: transparent;
-}
+
 body {
   background-color: #525252cb;
   background-size: cover;
@@ -346,32 +350,6 @@ main h2 {
   color: black;
 }
 
-.li-calendar {
-  list-style: none;
-}
-
-.ul-calendar {
-  margin: 0;
-  padding: 0;
-}
-
-.calendar-container {
-  display: grid;
-  grid-template-columns: 10px auto;
-  grid-template-rows: auto;
-  gap: 1px 1px;
-  grid-template-areas:
-    ". header-calendar"
-    "timeslots-container main";
-}
-
-.weekdays,
-.daynumbers {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-
-
 .salonContainer {
 	max-width: 80%;
 	margin: 0 auto;
@@ -438,16 +416,16 @@ button:hover{
 	transition: transform 0.5s;
 }
 .c1{
-	background-image: url("/reactapp/public/img/b1.png");
+	background-image: url("img/b1.png");
 }
 .c2{
-	background-image: url("/reactapp/public/img/b2.png");
+	background-image: url("img/b2.png");
 }
 .c3{
-	background-image: url("/reactapp/public/img/b3.png");
+	background-image: url("img/b3.png");
 }
 .c4{
-	background-image: url("/reactapp/public/img/b4.png");
+	background-image: url("img/b4.png");
 }
 
 
@@ -471,7 +449,7 @@ button:hover{
 }
 	
 .navbarSalon a:hover{
-	transform: translateY(-2px);
+	transform: translateY(-4px);
 }
 
 .cardProfilClient {
@@ -548,7 +526,7 @@ button:hover{
   background-color:rgba(0, 0, 0, 0.24);
   color: #F5F5F5;
   box-shadow: 2px 2px 30px black;
-  transition: transform 0.6s;
+  transition: transform 0.5s;
 }
 .avis:hover{
   transform: translateY(-2px);
@@ -685,6 +663,11 @@ padding: 10px;
 .avisTitre{
   display: flex;
   flex-direction: column;
+  font-size: 40px;
+  color: white;
+  font-weight: 400;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px rgb(0, 0, 255);
+  padding-bottom: 10px;
 }
 .nameUser{
   font-size: 12px;
@@ -702,4 +685,350 @@ padding: 10px;
 }
 .commentaires .rating{
   font-size: 20px;
+}
+
+.heart {
+  color: red;
+	cursor: pointer;
+}
+.heart .heart.active {
+	opacity: 0;
+	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+.divSalonFavoris {
+  background-color:rgb(255, 255, 255);
+  width: 413px;
+  transition: transform 0.5s;
+  border: solid 1px rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 10px;
+  margin:10px;
+  box-shadow: 2px 2px 20px #00eeff56;
+}
+.divSalonFavoris button {
+  background: #4383FF;
+  color: white;
+}
+.divSalonFavoris:hover {
+	transform: translateY(-4px);
+}
+.divSalonFavoris h2{
+  -webkit-text-fill-color: #00eeff0e;
+  -webkit-text-stroke-color: #000000;
+  -webkit-text-stroke-width: 1px;
+	font-size: 35px;
+	font-weight: bold;
+}
+.divSalonFavoris p{
+	color: black;
+  font-size: 12px;
+
+}
+
+.salonFlexFavoris{
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+#titrePage {
+  font-size: 40px;
+  color: white;
+  font-weight: 400;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px rgb(0, 0, 255);
+  text-align: center;
+  padding-top: 10px;
+  height: 80px;
+}
+
+#tiret{
+  color: white;
+  text-shadow: 0 0 3px #ffffff, 0 0 5px rgb(255, 255, 255);
+}
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.calendar-container {
+  background: transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 2px 2px 30px black;
+  display: grid;
+  grid-template-columns: 50px auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". header"
+    "timeslots-container main";
+}
+
+.weekdays,
+.daynumbers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays {
+  background: rgb(83, 83, 83);
+  color: whitesmoke;
+}
+
+.daynumbers {
+  background: rgb(194, 194, 194);
+  min-height: 2em;
+}
+
+.daynumbers li {
+  border-right: 1px solid black;
+}
+
+.header {
+  background: rgb(224, 189, 156);
+  grid-area: header;
+}
+
+.timeslots-container {
+  background: lightblue;
+  grid-area: timeslots-container;
+  justify-items: left;
+}
+
+.timeslots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeslots li {
+  min-height: 60px;
+}
+
+.timeslots li::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  width: 98.9%;
+  height: 1px;
+  background: #afafaf;
+  z-index: 1;
+}
+
+.event-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  grid-template-rows: repeat(36, 1fr);
+  background: rgb(222, 223, 231);
+  grid-area: main;
+  position: relative;
+  white-space: nowrap;
+  background: repeating-linear-gradient(
+    to right,
+    white 0%,
+    white 14.1%,
+    rgb(0, 0, 0) 14.28%
+  );
+}
+
+.event-name {
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  line-height: 15px;
+}
+
+.slot {
+  position: absolute;
+  background: rgb(66, 147, 223);
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: 1px;
+  border-color: rgb(3, 155, 229);
+  outline: none;
+}
+
+.slot::before {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+
+.slot::after {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: -webkit-calc(100% + 2px);
+  width: calc(100% + 2px);
+  height: -webkit-calc(100% + 2px);
+  height: calc(100% + 2px);
+  content: "";
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  pointer-events: none;
+  border: 1px solid #fff;
+}
+
+.event-status {
+  float: left;
+  border-left: 3px solid rgb(71, 235, 93);
+  height: 100%;
+}
+
+.slot-1 {
+  /* is based on duration */
+  height: 30px;
+
+  /* based on start time */
+  grid-row: 17;
+
+  /* based on day of week */
+  grid-column: 1;
+}
+
+.slot-2 {
+  height: 30px;
+    /* based on start time */
+    grid-row: 11;
+
+    /* based on day of week */
+    grid-column: 4;
+}
+
+.slot-3 {
+  height: 75px;
+}
+
+.slot-4 {
+  color: red;
+}
+
+.on-resize {
+  opacity: 0.85;
+}
+
+.gridcell::after {
+  content: "";
+  border-right: #dadce0 1px solid;
+  position: relative;
+  /* padding-right: 12px; */
+  /* -webkit-box-sizing: border-box; */
+  /* box-sizing: border-box; */
+  -webkit-box-flex: 1 1 auto;
+  /* -webkit-flex: 1 1 auto; */
+  /* flex: 1 1 auto; */
+  height: 200%;
+}
+
+sup {
+  font-size:9px;
+}
+
+.history_lists{
+  background: transparent;
+  border-radius: 10px;
+  padding: 30px 40px;
+  border: 2px solid rgb(255, 255, 255);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  margin-bottom: 20px;
+}
+.list1{
+  border-radius: 10px;
+  background: white;
+  padding: 10px;
+  height: 477px;
+  width: 480px;
+  box-shadow: 2px 2px 30px rgba(255, 255, 255, 0.637);
+}
+.list1 td{
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+}
+#date{
+  padding-right: 150px;
+}
+
+#accueilFlex{
+  display: flex;
+
+}
+
+#accueilSalon{
+  background-color: #ebfffc!important;
+}
+
+#post-form{
+  padding: 20px;
+
+}
+.card-container2 input {
+  margin-left: 5px;
+  background-color: #ffffffd5;
+  padding: 5px;
+  border-radius: 0.5rem;
+  border:1px solid lightsteelblue;
+  outline: none;
+  resize: none;
+  margin-bottom: 0.5rem;
+}
+
+#image{
+  border:none;
+  margin-left: 0px;
+  border-radius: 0px;
+  padding: 0px;
+}
+#telephoneSalon{
+  margin-left: 47px;
+}
+#adresse{
+  margin-left: 51px;
+}
+.card form div {
+  margin-top: 10px;
+}
+
+#post-form .btn-group{
+  padding-top: 10px;
+}
+
+.card-container2 {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+textarea {
+  width: 100%;
+  background-color: #ffffffd5;
+  padding: 5px;
+  border-radius: 0.5rem;
+  border: 1px solid lightsteelblue;
+  outline: none;
+  resize: none;
+  margin-bottom: 1px;
 }
