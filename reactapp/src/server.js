@@ -19,7 +19,7 @@ const logoutSalon = require('./routes/salonCoiffure//logoutSalon')
 // Routes Coiffeur
 const registerCoiffeur = require('./routes/coiffeur/registrerCoiffeur')
 const loginCoiffeur = require('./routes/coiffeur/loginCoiffeur')
-const modifierCoiffeur = require('./routes/coiffeur/midifierCoiffeur')
+const modifierCoiffeur = require('./routes/coiffeur/modifierCoiffeur')
 const voirCoiffeurParIDSalon = require('./routes/coiffeur/voirCoiffeurParIDSalon')
 const logoutCoiffeur = require('./routes/coiffeur/logoutCoiffeur')
 const deleteCoiffeur = require('./routes/coiffeur/deleteCoiffeur')
