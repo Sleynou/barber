@@ -12,7 +12,6 @@ const ClientNavbar = ({ token }) => {
    
   };
 
-  console.log('aaaa', isLoggedIn);
   return (
     <Menu fixed="top" borderless size="massive">
       <Container style={{width: "100%", paddingLeft: "2%", paddingRight: '3%'}}>

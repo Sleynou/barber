@@ -112,7 +112,7 @@ const AccueilClient = () => {
         <Segment vertical style={{ minHeight: '50vh', padding: '4em 0em', background: '#ffffff', display: 'flex', alignItems: 'center' }}>
           <Container textAlign="center">
             <Header as="h3" style={{ fontSize: '5em', paddingBottom: '1em' }}>Profitez d'offres exclusives</Header>
-                <Card style={{ width: '80%', maxWidth: '800px', margin: '0 auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px' }}>
+                <Card style={{ width: '70%', maxWidth: '800px', margin: '0 auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px' }}>
                     <Image src="/img/Barbediscount.jpg" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }} />
                     <Card.Description>
                         <p style={{ fontSize: '2em', padding: '1em' }}>Profitez de promotions exclusives et de remises spéciales réservées aux utilisateurs de notre application.</p>
