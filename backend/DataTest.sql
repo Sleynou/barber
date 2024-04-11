@@ -296,3 +296,5 @@ VALUES (5, '2024-04-01', '08:00:00', '17:00:00');
 INSERT INTO DisponibiliteSalon (idSalon, DateDispo, Ouverture, Fermeture)
 VALUES (5, '2024-04-02', '08:00:00', '17:00:00');
 
+INSERT INTO DisponibiliteSalon (idSalon, DateDispo, Ouverture, Fermeture)
+VALUES (1, '2024-04-11', '08:00:00', '17:00:00');
