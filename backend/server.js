@@ -12,9 +12,10 @@ const deleteClient = require('./routes/client/deleteClient')
 
 // Routes Salon
 const registerSalon = require('./routes/salonCoiffure/registrerSalon')
-const loginSalon = require('./routes/salonCoiffure//loginSalon')
-const modifierSalon = require('./routes/salonCoiffure//modifierSalon')
-const logoutSalon = require('./routes/salonCoiffure//logoutSalon')
+const loginSalon = require('./routes/salonCoiffure/loginSalon')
+const modifierSalon = require('./routes/salonCoiffure/modifierSalon')
+const logoutSalon = require('./routes/salonCoiffure/logoutSalon')
+const getSalons = require('./routes/salonCoiffure/getSalonCoiffure')
 
 // Routes Coiffeur
 const registerCoiffeur = require('./routes/coiffeur/registrerCoiffeur')
@@ -73,6 +74,7 @@ app.use('/', registerSalon)
 app.use('/', loginSalon)
 app.use('/', modifierSalon)
 app.use('/', logoutSalon)
+app.use('/', getSalons)
 
 app.use('/', registerCoiffeur)
 app.use('/', loginCoiffeur)

@@ -9,13 +9,14 @@ const LoginForm = () => {
         <div className="login-form" style={{ flex: 1 }}>
           <Form>
             <Header as="h1" style={{ color: '#333', fontSize: '8em', marginBottom: '0.5em', marginTop: '0.5em' }}>El Barber</Header>
-            <Header as="h2" style={{ fontSize: '4em', marginBottom: '1em'}}>Connexion</Header>
+            <Header as="h2" style={{ fontSize: '3.5em', marginBottom: '1em'}}>Connexion Client</Header>
             <Form.Field style={{ marginLeft:'28%', width: '400px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
                 <Input
                     iconPosition='left'
                     placeholder='Email'
                     type='email'
                     icon={<Icon name='envelope' />}
+                    required
                 />
             </Form.Field>
             <Form.Field style={{ marginLeft:'28%', width: '400px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
@@ -24,6 +25,7 @@ const LoginForm = () => {
                     placeholder='Password'
                     type='password'
                     icon={<Icon name='lock' />}
+                    required
                 />
             </Form.Field>
             <Form.Field>

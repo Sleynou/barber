@@ -68,35 +68,35 @@ VALUES (5, 'Émilie', 'Renaud', 'emilie.renaud@example.com', 'emilie.jpg', 'mdp2
 ----------------------------------------------------------------------------------------------------
 
 --SalonCoiffures
-INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Salon de Beauté Élégance', '0123456789', '123 Rue de la Beauté', 'Salon de beauté spécialisé dans les coupes modernes et les soins capillaires de haute qualité.', 'contact@elegance.com', 'mdp123');
+INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, photoProfil, Email, MotDePasse)
+VALUES ('Salon de Beauté Élégance', '0123456789', '123 Rue de la Beauté', 'Salon de beauté spécialisé dans les coupes modernes et les soins capillaires de haute qualité.',readfile('../reactapp/public/img/backgroundlogin2.jpg') , 'contact@elegance.com', 'mdp123');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Chez Coiffeur', '0987654321', '456 Avenue des Cheveux', 'Salon de coiffure familial offrant des coupes classiques et des styles tendance pour toute la famille.', 'contact@chezcoiffeur.com', 'mdp456');
+VALUES ('Chez Coiffeur', '0987654321', '456 Avenue des Cheveux', 'Salon de coiffure familial offrant des coupes classiques et des styles tendance pour toute la famille.',(SELECT readfile('../reactapp/public/img/backgroundlogin3.jpg')) , 'contact@chezcoiffeur.com', 'mdp456');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Studio de Coiffure Chic', '0543219876', '789 Boulevard de la Mode', 'Studio de coiffure haut de gamme offrant des services de coupe, de coloration et de stylisme personnalisés.', 'contact@chicstudio.com', 'mdp789');
+VALUES ('Studio de Coiffure Chic', '0543219876', '789 Boulevard de la Mode', 'Studio de coiffure haut de gamme offrant des services de coupe, de coloration et de stylisme personnalisés.',(SELECT readfile('../reactapp/public/img/backgroundlogin4.jpg')) , 'contact@chicstudio.com', 'mdp789');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Le Salon Créatif', '0789456123', '987 Rue de l''Art', 'Salon de coiffure créatif proposant des coupes uniques et des styles innovants pour ceux qui osent être différents.', 'contact@lesaloncreatif.com', 'mdp101112');
+VALUES ('Le Salon Créatif', '0789456123', '987 Rue de l''Art', 'Salon de coiffure créatif proposant des coupes uniques et des styles innovants pour ceux qui osent être différents.',(SELECT readfile('../reactapp/public/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_a_prof_0.jpg')) , 'contact@lesaloncreatif.com', 'mdp101112');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Salon Harmonie des Cheveux', '0321654987', '654 Avenue de l''Harmonie', 'Salon de coiffure équilibré offrant des services de coupe et de coloration pour hommes et femmes.', 'contact@harmoniecheveux.com', 'mdp131415');
+VALUES ('Salon Harmonie des Cheveux', '0321654987', '654 Avenue de l''Harmonie', 'Salon de coiffure équilibré offrant des services de coupe et de coloration pour hommes et femmes.',(SELECT readfile('../reactapp/public/img/Default_A_moder_banner_for_a_barbershop_in_hd_Professional_3.jpg')) , 'contact@harmoniecheveux.com', 'mdp131415');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('La Coupe Parfaite', '0912345678', '321 Rue de la Perfection', 'Salon de coiffure spécialisé dans la création de coupes personnalisées pour mettre en valeur la beauté naturelle de chaque client.', 'contact@lacoupeparfaite.com', 'mdp161718');
+VALUES ('La Coupe Parfaite', '0912345678', '321 Rue de la Perfection', 'Salon de coiffure spécialisé dans la création de coupes personnalisées pour mettre en valeur la beauté naturelle de chaque client.',(SELECT readfile('../reactapp/public/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_a_prof_0.jpg')) , 'contact@lacoupeparfaite.com', 'mdp161718');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Beauté et Style', '0765432198', '456 Boulevard de la Beauté', 'Salon de beauté offrant des services de coiffure et de soins esthétiques pour une apparence élégante et soignée.', 'contact@beauteetstyle.com', 'mdp192021');
+VALUES ('Beauté et Style', '0765432198', '456 Boulevard de la Beauté', 'Salon de beauté offrant des services de coiffure et de soins esthétiques pour une apparence élégante et soignée.',(SELECT readfile('../reactapp/public/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_withou_0 (1).jpg')) , 'contact@beauteetstyle.com', 'mdp192021');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Salon Prestige', '0123456789', '789 Avenue du Prestige', 'Salon de coiffure de luxe offrant des services exclusifs de coupe, de coloration et de soins capillaires pour une expérience haut de gamme.', 'contact@salonprestige.com', 'mdp222324');
+VALUES ('Salon Prestige', '0123456789', '789 Avenue du Prestige', 'Salon de coiffure de luxe offrant des services exclusifs de coupe, de coloration et de soins capillaires pour une expérience haut de gamme.',(SELECT readfile('../reactapp/public/img/Default_A_sleek_cuttingedge_barbershop_banner_in_high_definiti_0 (3).jpg')) , 'contact@salonprestige.com', 'mdp222324');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Coupe et Couleur', '0987654321', '654 Rue de la Coupe', 'Salon de coiffure dynamique proposant des services de coupe et de coloration pour un look moderne et vibrant.', 'contact@coupeetcouleur.com', 'mdp252627');
+VALUES ('Coupe et Couleur', '0987654321', '654 Rue de la Coupe', 'Salon de coiffure dynamique proposant des services de coupe et de coloration pour un look moderne et vibrant.',(SELECT readfile('../reactapp/public/img/Default_A_sleek_cuttingedge_barbershop_banner_in_high_definiti_0.jpg')) , 'contact@coupeetcouleur.com', 'mdp252627');
 
 INSERT INTO SalonCoiffure (nomSalon, telephoneSalon, adresse, bio, Email, MotDePasse)
-VALUES ('Style et Élégance', '0543219876', '321 Avenue de l''Élégance', 'Salon de coiffure élégant offrant des services de coupe et de stylisme pour une allure sophistiquée et raffinée.', 'contact@styleetelegance.com', 'mdp282930');
+VALUES ('Style et Élégance', '0543219876', '321 Avenue de l''Élégance', 'Salon de coiffure élégant offrant des services de coupe et de stylisme pour une allure sophistiquée et raffinée.',(SELECT readfile('../reactapp/public/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_withou_0 (2).jpg')) , 'contact@styleetelegance.com', 'mdp282930');
 
 --------------------------------------------------------------------------------------------------------------------
 

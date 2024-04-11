@@ -106,8 +106,19 @@ create table SalonCoiffure
     telephoneSalon varchar(50) not null,
     adresse varchar(50) not null,
     bio text,
+    photoProfil blob not null,
     Email varchar(50) not null UNIQUE,
     MotDePasse varchar(128) not null
+)
+
+------------------------------------------------------------------------------------------------------------------------------
+
+create table PhotosSalon 
+(
+    idPhoto integer primary key autoincrement,
+    SalonId integer,
+    picture blob,
+    foreign key(SalonId) REFERENCES SalonCoiffure(idSalon)
 )
 
 -------------------------------------------------------------------------------------------------------------------------------
