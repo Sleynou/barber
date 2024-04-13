@@ -55,13 +55,13 @@ create table Coiffeur
 
 --------------------------------------------------------------------------------------------------------------------------
 --Travail fait par Jorge/Alejandro
-create table CoiffeurFavoris
+create table SalonFavoris
 (
     idFavoris INTEGER PRIMARY KEY AUTOINCREMENT,
     idClient INTEGER, 
-    idCoiffeur INTEGER,
+    idSalon INTEGER,
     FOREIGN KEY(idClient) references Client(idCLIENT),
-    FOREIGN KEY(idCoiffeur) references Coiffeur(IDCoiffeur)
+    FOREIGN KEY(idSalon) references SalonCoiffure(idSalon)
 )
 
 --------------------------------------------------------------------------------------------------------------------------

@@ -1,7 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require("cors");
+const multer = require('multer');
 const port = 3000
+
+app.post('/image-upload', (req, res) => {
+  console.log('POST request received to /image-upload.')
+})
 
 //Routes Client
 const registerClient = require('./routes/client/registrerClient')
@@ -37,10 +43,10 @@ const voirServicesParidSalon = require('./routes/service/voirServicesParidSalon'
 const enregistrerAvis = require('./routes/avis/enregistrerAvis')
 const voirAvisParidSalonCoiffure = require('./routes/avis/voirAvisParidSalonCoiffure')
 
-// Routes CoiffeurFavoris
-const enregistrerCoiffeurFavoris = require('./routes/coiffeurFavoris/enregistrerCoiffeurFavoris')
-const voirCoiffeurFavorisParidClient = require('./routes/coiffeurFavoris/voirCoiffeurFavorisParidClient')
-const deleteCoiffeurFavorisParidClientidCoiffeur = require('./routes/coiffeurFavoris/deleteCoiffeurFavorisParidClientidCoiffeur')
+// Routes SalonFavoris
+const enregistrerSalonFavoris = require('./routes/SalonFavoris/enregistrerSalonFavoris')
+const voirSalonFavorisParidClient = require('./routes/SalonFavoris/voirSalonFavorisParidClient')
+const deleteSalonFavorisParidClientidSalon = require('./routes/SalonFavoris/deleteSalonFavorisParidClientidSalon')
 
 //Routes RendezVous
 const consulterRdvClient = require('./routes/rendezVous/consulterRdvClient')
@@ -64,7 +70,8 @@ const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSal
 const cors = require("cors")
 app.use(cors())
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use('/', registerClient)
 app.use('/', loginClient)
@@ -96,9 +103,9 @@ app.use('/', deleteService)
 app.use('/', enregistrerAvis)
 app.use('/', voirAvisParidSalonCoiffure)
 
-app.use('/', enregistrerCoiffeurFavoris)
-app.use('/', voirCoiffeurFavorisParidClient)
-app.use('/',deleteCoiffeurFavorisParidClientidCoiffeur)
+app.use('/', enregistrerSalonFavoris)
+app.use('/', voirSalonFavorisParidClient)
+app.use('/',deleteSalonFavorisParidClientidSalon)
 
 
 app.use('/', consulterRdvClient)

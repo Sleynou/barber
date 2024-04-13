@@ -10,6 +10,7 @@ import RegisterForm from './components/espaceClient/RegisterForm.jsx'
 import HomeClient from './components/espaceClient/HomeClient.jsx';
 import DetailsSalon from './components/espaceClient/DetailsSalonCoiffure.jsx'
 import ProfilClient from './components/espaceClient/ProfilClient.jsx';
+import FavorisClient from './components/espaceClient/FavorisClient.jsx';
 
 function App() {
 
@@ -20,11 +21,12 @@ function App() {
 
         {/* <AccueilClient/> */}
         {/* <LoginForm/> */}
-        {/* <RegisterForm/> */}
+        <RegisterForm/>
         {/* <HomeClient/> */}
         {/* <DetailsSalon/> */}
+        {/* <ProfilClient/> */}
+        {/* <FavorisClient/> */}
 
-        <ProfilClient/>
         <Footer/> 
       </BrowserRouter>
     </div>
