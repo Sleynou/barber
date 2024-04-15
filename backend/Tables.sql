@@ -26,14 +26,14 @@ GO
 );
 
     -------------------------------------------------------------------------------------------------------------------
-
+drop table CLient
     --Travail fait par Jorge/Alejandro
     create table Client
 (
     IDclient integer PRIMARY KEY AUTOINCREMENT,
     PrenomClient varchar(50) not null,
     NomClient varchar(50) not null,
-    photoProfil blob not null,
+    photoProfil text not null,
     Email varchar(50) not null unique ,
     MotDePasse varchar(128) not null
 )

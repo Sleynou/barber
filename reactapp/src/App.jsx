@@ -1,8 +1,7 @@
-import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import { BrowserRouter } from 'react-router-dom';
 
-import ClientNavbar from './components/espaceClient/ClientNavBar'
+import ClientNavbar from './components/espaceClient/ClientNavBar.jsx'
 import AccueilClient from './components/espaceClient/AccueilClient'
 import Footer from './components/espaceClient/Footer.jsx'
 import LoginForm from './components/espaceClient/LoginForm.jsx';
@@ -21,10 +20,10 @@ function App() {
 
         {/* <AccueilClient/> */}
         {/* <LoginForm/> */}
-        <RegisterForm/>
+        {/* <RegisterForm/> */}
         {/* <HomeClient/> */}
         {/* <DetailsSalon/> */}
-        {/* <ProfilClient/> */}
+        <ProfilClient/>
         {/* <FavorisClient/> */}
 
         <Footer/> 

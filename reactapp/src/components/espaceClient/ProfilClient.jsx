@@ -22,7 +22,7 @@ const ProfilClient = (props) => {
             setPrenom(response.data[0].PrenomClient)
             setNom(response.data[0].NomClient)
             setEmail(response.data[0].Email)
-            setPhoto(URL.createObjectURL(new Blob([new Uint8Array(response.data[0].photoProfil.data)])))
+            setPhoto(response.data[0].photoProfil)
             console.log(response.data);
           } catch (error) {
             console.error('Erreur lors de l obtention de l info du Salon', error);
@@ -65,6 +65,8 @@ const ProfilClient = (props) => {
             console.error('Error:', error);
         }
     };
+
+    console.log(`../../../../backend/uploaded_files/client/${photo}`)
   return (
     <Container style={{ marginTop: '9em', marginBottom: '8em' }}>
         
@@ -75,7 +77,7 @@ const ProfilClient = (props) => {
                 </Grid.Column>
                 
                 <Grid.Column width={5}>
-                    <Image style={{height:'280px' , borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={photo}/>
+                    <Image style={{height:'280px' , borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={`../../../../backend/uploaded_files/client/${photo}`} alt='phot Profil'/>
                 </Grid.Column>
 
                 <Grid.Column width={10} textAlign='left'>

@@ -2,12 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const cors = require("cors");
-const multer = require('multer');
 const port = 3000
-
-app.post('/image-upload', (req, res) => {
-  console.log('POST request received to /image-upload.')
-})
 
 //Routes Client
 const registerClient = require('./routes/client/registrerClient')
@@ -67,11 +62,19 @@ const consulterDipoSalon = require('./routes/disponibiliteSalon/consulterDipoSal
 const deleteDispoSalon = require('./routes/disponibiliteSalon/deleteDispoSalon')
 const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSalon')
 
-const cors = require("cors")
-app.use(cors())
+const imageUpload = require('./imageUpload')
 
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+const corsOrigin = 'http://localhost:3001';
+app.use(cors({
+  origin:[corsOrigin],
+  methods:['GET','POST'],
+  credentials: true 
+})); 
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/', imageUpload)
 
 app.use('/', registerClient)
 app.use('/', loginClient)
