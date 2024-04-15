@@ -63,11 +63,12 @@ const deleteDispoSalon = require('./routes/disponibiliteSalon/deleteDispoSalon')
 const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSalon')
 
 const imageUpload = require('./imageUpload')
+const getImageClient = require('./getImageClient')
 
 const corsOrigin = 'http://localhost:3001';
 app.use(cors({
   origin:[corsOrigin],
-  methods:['GET','POST'],
+  methods:['GET','POST', 'PUT', 'DELETE'],
   credentials: true 
 })); 
 
@@ -75,6 +76,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', imageUpload)
+app.use('/', getImageClient)
 
 app.use('/', registerClient)
 app.use('/', loginClient)

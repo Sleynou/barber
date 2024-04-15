@@ -10,7 +10,23 @@ const FavorisClient = () => {
 
     const toggleFavorite = async (idSalon) => {
         try {
-            await axios.delete(`http://localhost:3000/deleteSalonFavorisParidClientidSalon?idClient=1&idSalon=${idSalon}`);
+            const url = `http://localhost:3000/deleteSalonFavorisParidClientidSalon`; 
+
+                const response = await fetch(url, {
+                    method: 'delete',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idClient: 2,
+                        idSalon
+                    })
+                });
+                if (response.ok) {
+                    console.log('[+] Favoris efface avec succes');
+                } else {
+                    console.error('Erreur lors de la supression des favoris', response);
+                }
         
             const updatedSalons = salons.filter(salon => salon.idSalon !== idSalon);
             setSalons(updatedSalons);
@@ -23,10 +39,10 @@ const FavorisClient = () => {
     useEffect(() => {
         const fetchSalons = async () => {
           try {
-            const response = await axios.get('http://localhost:3000/voirSalonFavorisParidClient', {
+            const response = await axios.get('http://localhost:3000/voirsalonFavorisParidclient', {
                 params: {
                     // id: props.match.params.id 
-                    id: 1
+                    idClient: 2
                   }
             });
             setSalons(response.data);

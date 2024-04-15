@@ -8,7 +8,7 @@ const checkBlacklist = require('../checkBlacklist')
 
 router.delete('/deleteSalonFavorisParidClientidSalon', async (req, res) => {
     try {
-        const { idClient, idSalon } = req.query;
+        const { idClient, idSalon } = req.body;
         
         const existingSalonFavoris = await db('SalonFavoris').where({ idClient, idSalon }).first();
         if (!existingSalonFavoris) {

@@ -23,7 +23,7 @@ function App() {
         {/* <RegisterForm/> */}
         {/* <HomeClient/> */}
         {/* <DetailsSalon/> */}
-        <ProfilClient/>
+        {/* <ProfilClient/> */}
         {/* <FavorisClient/> */}
 
         <Footer/> 

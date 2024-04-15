@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Header, Segment, Grid, Image, Icon, Label, Button, Input, Message } from 'semantic-ui-react';
 import axios from 'axios';
 
+
 const ProfilClient = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [prenom, setPrenom] = useState('');
@@ -16,14 +17,22 @@ const ProfilClient = (props) => {
             const response = await axios.get('http://localhost:3000/getClientparID', {
               params: {
                 // id: props.match.params.id 
-                id: 1
+                id: 2
               }
             });
             setPrenom(response.data[0].PrenomClient)
             setNom(response.data[0].NomClient)
             setEmail(response.data[0].Email)
-            setPhoto(response.data[0].photoProfil)
-            console.log(response.data);
+            const nom = response.data[0].photoProfil
+            console.log(nom);
+
+            const responseImage = await fetch(`http://localhost:3000/file/${nom}`);
+            const arrayBuffer = await responseImage.arrayBuffer();
+            const blob = new Blob([arrayBuffer]);
+            const url = URL.createObjectURL(blob);
+            setPhoto(url)
+        
+            // window.open(url);
           } catch (error) {
             console.error('Erreur lors de l obtention de l info du Salon', error);
           }
@@ -66,7 +75,6 @@ const ProfilClient = (props) => {
         }
     };
 
-    console.log(`../../../../backend/uploaded_files/client/${photo}`)
   return (
     <Container style={{ marginTop: '9em', marginBottom: '8em' }}>
         
@@ -77,7 +85,7 @@ const ProfilClient = (props) => {
                 </Grid.Column>
                 
                 <Grid.Column width={5}>
-                    <Image style={{height:'280px' , borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={`../../../../backend/uploaded_files/client/${photo}`} alt='phot Profil'/>
+                    <Image style={{height:'280px' , borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={photo} alt='phot Profil'/>
                 </Grid.Column>
 
                 <Grid.Column width={10} textAlign='left'>

@@ -1,11 +1,8 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const app = express()
 const db = require('../db'); // Importa el módulo de conexión a la base de datos
 const secretKey = 'your-secret-key'
-app.use(bodyParser.json())
 const router = express.Router()
 
 router.post('/loginClient', async (req, res) => {
@@ -15,8 +12,9 @@ router.post('/loginClient', async (req, res) => {
   
       // Récupérer l'utilisateur depuis la base de données
       const user = await getUserClientByUsername(Email)
-       console.log(user)////////////////////////////////////////////////////////////////////////////////////
+      console.log(user)////////////////////////////////////////////////////////////////////////////////////
       if (!user) {
+        
         return res.status(401).json({ message: 'L\'utilisateur n\'a pas été trouvé' })
       }
 
@@ -38,13 +36,12 @@ router.post('/loginClient', async (req, res) => {
       const expirationTime = expirationDate.toLocaleTimeString()
       const expirationDateTime = expirationDate.toLocaleDateString() + ' ' + expirationTime
   
-      res.json({ message: 'Connexion réussie', token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
-      res.redirect('/reactapp/public/coiffeur/acceuilCoiffeur.html');
+      res.status(200).json({ message: 'Connexion réussie', token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: 'Une erreur est survenue' })
     }
-  })
+})
 
 
 async function getUserClientByUsername(Email) {

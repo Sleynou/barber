@@ -1,67 +1,137 @@
 import React, { useState, useEffect  } from 'react';
 import { Container, Header, Card, Icon, Image } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 const HomeClient = () => {
-    const [favorited, setFavorited] = useState(false);
+    const [favoritedMap, setFavoritedMap] = useState(new Map());
     const [salons, setSalons] = useState([]);
 
-    const toggleFavorite = () => {
-        setFavorited(!favorited);
+    const toggleFavorite = async (idSalon) => {
+        try {
+            const isFavorited = favoritedMap.get(idSalon) || false; 
+            setFavoritedMap(new Map(favoritedMap.set(idSalon, !isFavorited))); 
+            
+            let url = '';
+            if (isFavorited) {
+                url = `http://localhost:3000/deleteSalonFavorisParidClientidSalon`; 
+
+                const response = await fetch(url, {
+                    method: 'delete',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idClient: 2,
+                        idSalon
+                    })
+                });
+                if (response.ok) {
+                    console.log('[+] Favoris efface avec succes');
+                } else {
+                    console.error('Erreur lors de la supression des favoris', response);
+                }
+            } else {
+                url = 'http://localhost:3000/enregistrerSalonFavoris'; 
+
+                const response = await fetch(url, {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idClient: 2,
+                        idSalon
+                    })
+                });
+                if (response.ok) {
+                    console.log('[+] Favoris Enregistrer avec succes');
+                } else {
+                    console.error('Erreur lors de l ajout des favoris', response);
+                }
+            }
+           
+        } catch (error) {
+            console.error('Error lors de la ajout/supression des favoris:', error);
+        }
     };
 
     useEffect(() => {
         const fetchSalons = async () => {
-          try {
-            const response = await axios.get('http://localhost:3000/getSalons');
-            setSalons(response.data);
-            console.log(response.data);
-          } catch (error) {
-            console.error('Error lors de l obtention des salons:', error);
-          }
+            try {
+                const responseSalons = await axios.get('http://localhost:3000/getSalons');
+                const allSalons = responseSalons.data;
+                console.log(allSalons);
+
+                const responseFavoris = await axios.get('http://localhost:3000/voirsalonFavorisParidclient', {
+                    params: {
+                        idClient: 2
+                    }
+                });
+                const favoritedSalonIds = responseFavoris.data.map(salon => salon.idSalon);
+    
+                const updatedFavoritedMap = new Map(favoritedMap);
+                allSalons.forEach(salon => {
+                    updatedFavoritedMap.set(salon.idSalon, favoritedSalonIds.includes(salon.idSalon));
+                });
+                console.log(updatedFavoritedMap);
+                setFavoritedMap(updatedFavoritedMap);
+    
+                setSalons(allSalons);
+            } catch (error) {
+                console.error('Error lors de l obtention des salons:', error);
+            }
         };
     
         fetchSalons();
     }, []);
 
     return (
-        <Container style={{ marginTop: '8em' }}>
-            <Header as="h1" textAlign="center" style={{ fontSize: '8em' }}>Salon de Coiffeurs</Header>
-            <Card.Group itemsPerRow={3} centered style={{ marginTop: '3em', marginBottom: '3em' }}>
-                {salons.map((salon, index) => {
-                     const blob = new Blob([new Uint8Array(salon.photoProfil.data)])
-                     const url = URL.createObjectURL(blob)
- 
-                     return (
-                         <Card key={index} style={{marginBottom: '5em', boxShadow: '0 4px 8px rgba(0, 0, 0, .5)'}} >
-                         <Image src={url} style={{height: '230px'}} />
-                         <Icon
-                             name="circle"
-                             color="blue"
-                             size="big"
-                             style={{
-                                 position: 'absolute',
-                                 top: '5px',
-                                 right: '2px',
-                                 zIndex: '1' 
-                             }}
-                         />
- 
-                         <Icon
-                             name={favorited ? 'heart' : 'heart outline'}
-                             color={favorited ? 'red' : 'black'}
-                             style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', zIndex: '2' }}
-                             onClick={toggleFavorite}
-                         />
-                         <Card.Content>
-                             <Card.Header>{salon.nomSalon}</Card.Header>
-                         </Card.Content>
-                     </Card>
-                     )
-                })}
-            </Card.Group>
+        <Container style={{ marginTop: '8em', width: '100%' }}>
+            <Header as="h1" textAlign="center" style={{ fontSize: '8em' }}>Salons de Coiffure</Header>
+            {salons.length > 0 && (
+        <Card.Group centered style={{ marginTop: '5em', marginBottom: '3em' }}>
+            {salons.map((salon, index) => {
+                const blob = new Blob([new Uint8Array(salon.photoProfil.data)])
+                const url = URL.createObjectURL(blob)
+
+                return (
+                    <NavLink to={`/getDetailsSalon?id=${salon.idSalon}`} key={salon.idSalon}>
+                        <Card key={salon.idSalon} style={{ width: '550px', height: '400px', marginRight: '3em', marginBottom: '7em', boxShadow: '0 4px 8px rgba(0, 0, 0, .5)' }}>
+
+                            <Image src={url} style={{ height: '350px' }} />
+
+                            <Icon
+                                name="circle"
+                                color="yellow"
+                                size="big"
+                                style={{
+                                    position: 'absolute',
+                                    top: '5px',
+                                    right: '2px',
+                                    zIndex: '1'
+                                }}
+                            />
+
+                            <Icon
+                                name={favoritedMap.get(salon.idSalon) ? 'heart' : 'heart outline'}
+                                color={favoritedMap.get(salon.idSalon) ? 'red' : 'black'}
+                                style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', zIndex: '2' }}
+                                onClick={() => { toggleFavorite(salon.idSalon) }}
+                            />
+                            <Card.Content>
+                                <Card.Header>{salon.nomSalon}</Card.Header>
+                            </Card.Content>
+
+                        </Card>
+                    </NavLink>
+                )
+            })}
+        </Card.Group>
+            )}
         </Container>
     );
 };
+
 
 export default HomeClient;

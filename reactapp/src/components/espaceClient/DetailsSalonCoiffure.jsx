@@ -43,7 +43,7 @@ const DetailsSalon = (props) => {
 
               <Grid.Column width={5} textAlign='left'>
                 <Header as="h1" style={{marginBottom: '1em'}}>Information du Salon</Header>
-                <p style={{marginBottom: '2em'}}><Icon name='clock'/> <b>Horaire Aujourd'hui:</b> { salonDetails.horaire[0].Ouverture  || "Fermé aujourd'hui"} - {salonDetails.horaire[0].Fermeture}</p>
+                <p style={{marginBottom: '2em'}}><Icon name='clock'/> <b>Horaire Aujourd'hui:</b> { salonDetails.horaire.length > 0 ? salonDetails.horaire[0].Ouverture + '-' +  salonDetails.horaire[0].Fermeture : "Fermé aujourd'hui"}</p>
                 <p style={{marginBottom: '2em'}}><Icon name='mail' /> <b>Email:</b> {salonDetails.salon[0].Email}</p>
                 <p style={{marginBottom: '2em'}}><Icon name='phone' /> <b>Telephone:</b> {salonDetails.salon[0].telephoneSalon}</p>
                 <p style={{marginBottom: '2em'}}><Icon name='map marker alternate' /> <b>Adresse:</b> {salonDetails.salon[0].adresse}</p>

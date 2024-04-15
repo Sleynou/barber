@@ -9,7 +9,7 @@ const RegistrationForm = () => {
     const [password, setPassword] = useState('');
     const [image, setImage] = useState(null);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
           axios.post('http://localhost:3000/image-upload', image)
