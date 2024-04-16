@@ -3,9 +3,10 @@ const router = express.Router();
 const db = require('../db');
 const checkBlacklist = require('../checkBlacklist')
 
-router.get('/RDVclient',checkBlacklist,  async (req,res) =>{
+router.get('/RDVclient',  async (req,res) =>{
     try{
-        const {iDClient} = req.body
+        const {iDClient} = req.query
+        console.log(iDClient);
 
         const verifierClient = await db.select().from('Client').where({IDclient: iDClient})
 
@@ -13,7 +14,12 @@ router.get('/RDVclient',checkBlacklist,  async (req,res) =>{
             return res.status(400).json({ message: 'Le client n existe pas' });
         }
 
-        const resultats = await db('RendezVous').select().where({idClient: iDClient})
+        const resultats = await db('RendezVous')
+            .select('RendezVous.idRDV', 'SalonCoiffure.nomSalon', 'Coiffeur.PrenomCoiffeur', 'Coiffeur.NomCoiffeur', 'Services.nom', 'Services.prix', 'Services.duree', 'RendezVous.dateRDV', 'RendezVous.heure')
+            .where({ idClient: iDClient })
+            .join('SalonCoiffure', 'RendezVous.idSalonCoiffure', '=', 'SalonCoiffure.idSalon')
+            .join('Services', 'RendezVous.idService', '=', 'Services.idService')
+            .join('Coiffeur', 'RendezVous.idCoiffeur', '=', 'Coiffeur.iDCoiffeur');
 
         res.status(200).json({ resultats });
     } catch(error){

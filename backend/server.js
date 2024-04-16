@@ -49,6 +49,7 @@ const consulterRdvCoiffeur = require('./routes/rendezVous/consulterRdvCoiffeur')
 const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvSalon')
 const modifierRendezVous = require('./routes/rendezVous/modiferRendezVous')
 const prendreRendezVous = require('./routes/rendezVous/prendreRendezVous')
+const annulerRdvClient = require('./routes/rendezVous/annulerRdvClient')
 
 // Routes DispoCoiffeur
 const ajouterDispoCoiffeur = require('./routes/disponibiliteCoiffeur/ajouterDispoCoiffeur')
@@ -118,6 +119,7 @@ app.use('/', consulterRdvCoiffeur)
 app.use('/', consulterRdvCSalon)
 app.use('/', modifierRendezVous)
 app.use('/', prendreRendezVous)
+app.use('/', annulerRdvClient)
 
 app.use('/', ajouterDispoCoiffeur)
 app.use('/', consulterDispoCoiffeur)

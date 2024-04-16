@@ -20,6 +20,7 @@ router.post('/loginClient', async (req, res) => {
 
       // Vérifier le mot de passe
       if (!(await bcrypt.compare(MotDePasse, user.MotDePasse))) {
+        console.log('MDP invalide');
         return res.status(401).json({ message: 'L\'utilisateur ou le mot de passe invalide(s)' })
       }
   
