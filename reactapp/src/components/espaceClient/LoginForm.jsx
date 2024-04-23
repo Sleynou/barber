@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import { Container, Form, Icon, Input, Button, Header } from 'semantic-ui-react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -21,8 +24,10 @@ const LoginForm = () => {
       const data = await response.json()
 
       if (response.ok) {
-          
-          console.log('[+]', data);
+        console.log('[+]', data);
+        const  token  = data.token;
+        sessionStorage.setItem('token', token);
+        navigate(`/home/${data.userID}`);
       } else {
           console.error('Error', response.statusText);
       }
@@ -30,6 +35,7 @@ const LoginForm = () => {
       console.error('Error', error);
   }
   }
+
   return (
     <div className="login-page" style={{ backgroundImage: `url('/img/Default_a_image_for_a_backgorund_barber_shop_website_2.jpg')`, backgroundSize: 'cover', height: '100vh' }}>
     <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', height: '100%',width: '100%' }}>
@@ -64,7 +70,7 @@ const LoginForm = () => {
             </Form.Field>
             <Form.Field style={{marginLeft: '43%'}}>
                 <Button type="submit" color='blue' style={{ marginTop: '15px', borderRadius: '20px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>SE CONNECTER</Button>
-                <p>Pas encore inscrit ? <a href="inscriptionClient.html">inscription</a></p>
+                <p >Pas encore inscrit ? <NavLink to="/register">Inscription</NavLink></p>
             </Form.Field>
           </Form>
         </div>

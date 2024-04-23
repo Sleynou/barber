@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import { Button, Form, Input, Icon, Label, Container, Header } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ const RegistrationForm = () => {
     const [password, setPassword] = useState('');
     const [image, setImage] = useState(null);
 
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -31,7 +33,8 @@ const RegistrationForm = () => {
             })
             .then(response => {
               if (response.ok) {
-                console.log('[+] User registre');
+                  console.log('[+] User registre');
+                  navigate('/login');
               } else {
                 console.error('Error', response.statusText);
               }

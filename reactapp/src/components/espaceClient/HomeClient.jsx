@@ -1,11 +1,15 @@
 import React, { useState, useEffect  } from 'react';
 import { Container, Header, Card, Icon, Image } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const HomeClient = () => {
     const [favoritedMap, setFavoritedMap] = useState(new Map());
     const [salons, setSalons] = useState([]);
+    const { user_id } = useParams();
+    console.log(user_id);
+
+    const navigate = useNavigate()
 
     const toggleFavorite = async (idSalon) => {
         try {
@@ -22,7 +26,7 @@ const HomeClient = () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        idClient: 2,
+                        idClient: user_id,
                         idSalon
                     })
                 });
@@ -40,7 +44,7 @@ const HomeClient = () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        idClient: 2,
+                        idClient: user_id,
                         idSalon
                     })
                 });
@@ -65,7 +69,7 @@ const HomeClient = () => {
 
                 const responseFavoris = await axios.get('http://localhost:3000/voirsalonFavorisParidclient', {
                     params: {
-                        idClient: 2
+                        idClient: user_id
                     }
                 });
                 const favoritedSalonIds = responseFavoris.data.map(salon => salon.idSalon);
@@ -96,8 +100,16 @@ const HomeClient = () => {
                 const url = URL.createObjectURL(blob)
 
                 return (
-                    <NavLink to={`/getDetailsSalon?id=${salon.idSalon}`} key={salon.idSalon}>
-                        <Card key={salon.idSalon} style={{ width: '550px', height: '400px', marginRight: '3em', marginBottom: '7em', boxShadow: '0 4px 8px rgba(0, 0, 0, .5)' }}>
+                        <Card key={salon.idSalon} style={{ 
+                            width: '550px', 
+                            height: '400px', 
+                            marginRight: '3em', 
+                            marginBottom: '7em', 
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, .5)'
+                            }}
+                            onClick={()=>{
+                                navigate(`/getDetailsSalon?id=${salon.idSalon}`)
+                            }}>
 
                             <Image src={url} style={{ height: '350px' }} />
 
@@ -117,14 +129,13 @@ const HomeClient = () => {
                                 name={favoritedMap.get(salon.idSalon) ? 'heart' : 'heart outline'}
                                 color={favoritedMap.get(salon.idSalon) ? 'red' : 'black'}
                                 style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', zIndex: '2' }}
-                                onClick={() => { toggleFavorite(salon.idSalon) }}
+                                onClick={(e) => { e.stopPropagation(); toggleFavorite(salon.idSalon) }}
                             />
                             <Card.Content>
                                 <Card.Header>{salon.nomSalon}</Card.Header>
                             </Card.Content>
 
                         </Card>
-                    </NavLink>
                 )
             })}
         </Card.Group>

@@ -27,7 +27,6 @@ router.post('/loginClient', async (req, res) => {
       // Générer un token JWT
       const expiresInSeconds = 12000
       const token = jwt.sign({ Email }, secretKey, { expiresIn: expiresInSeconds })
-  
       // Obtenir la date actuelle
       const now = new Date()
       // Calculer la date d'expiration
@@ -36,8 +35,9 @@ router.post('/loginClient', async (req, res) => {
       // Formater la date y l'heure de expiration
       const expirationTime = expirationDate.toLocaleTimeString()
       const expirationDateTime = expirationDate.toLocaleDateString() + ' ' + expirationTime
-  
-      res.status(200).json({ message: 'Connexion réussie', token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
+      const userID = user.IDclient
+
+      res.status(200).json({ message: 'Connexion réussie', userID , token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: 'Une erreur est survenue' })

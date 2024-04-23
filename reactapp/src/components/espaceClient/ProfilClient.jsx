@@ -17,7 +17,7 @@ const ProfilClient = (props) => {
             const response = await axios.get('http://localhost:3000/getClientparID', {
               params: {
                 // id: props.match.params.id 
-                id: 2
+                id: 4
               }
             });
             setPrenom(response.data[0].PrenomClient)

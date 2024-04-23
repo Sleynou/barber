@@ -19,7 +19,8 @@ router.post('/registerClient',  async (req, res) => {
     const hashedPassword = await bcrypt.hash(MotDePasse, 10)
 
     await insertUserClient(PrenomClient, NomClient, Email, hashedPassword, photoProfil);
-    res.status(200).json({ message: 'Client register avec succes' });
+    
+    res.status(200).json({ message: 'Client register avec succes'});
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'error' });
