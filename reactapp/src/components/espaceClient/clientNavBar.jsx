@@ -4,6 +4,7 @@ import { Menu, Container, Button } from 'semantic-ui-react';
 
 const ClientNavbar = () => {
   let token = sessionStorage.getItem('token');
+  let idUser = sessionStorage.getItem('idUtilisateur');
   let isLoggedIn = token ? true : false;
 
   const location = useLocation();
@@ -32,10 +33,10 @@ const ClientNavbar = () => {
           )}
           {isLoggedIn && (
             <>
-              <Menu.Item as={NavLink} to="/home/:id" style={{ marginRight: '15px'}}>Accueil</Menu.Item>
-              <Menu.Item href="profilClient.html" style={{ marginRight: '15px'}}>Profil</Menu.Item>
-              <Menu.Item href="historiqueRdvClient.html" style={{ marginRight: '15px'}}>Reservations</Menu.Item>
-              <Menu.Item href="coiffeurFavoris.html">Favoris</Menu.Item>
+              <Menu.Item as={NavLink} to={`/home/${idUser}`} style={{ marginRight: '15px'}}>Accueil</Menu.Item>
+              <Menu.Item  as={NavLink} to={`/profil/${idUser}`} style={{ marginRight: '15px'}}>Profil</Menu.Item>
+              <Menu.Item as={NavLink} to={`/reservations/${idUser}`} style={{ marginRight: '15px'}}>Reservations</Menu.Item>
+              <Menu.Item as={NavLink} to={`/favoris/${idUser}`}>Favoris</Menu.Item>
               <Menu.Item>
               <Button color="red" circular onClick={handleLogout}>
                 Deconnexion

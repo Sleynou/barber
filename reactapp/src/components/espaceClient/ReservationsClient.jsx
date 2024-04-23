@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Grid, Header, Table,Form, Button, Message, Input, Label } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import './Calendar.css'
 import axios from 'axios';
@@ -14,12 +15,14 @@ const ReservationsClient = () => {
   const [heure, setHeure] = useState('')
   const [editedReservations, setEditedReservations] = useState([]);
 
+  const { user_id } = useParams();
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
         const response = await axios.get('http://localhost:3000/RDVclient', {
           params: {
-            iDClient: 1
+            iDClient: user_id
           }
         });
         if (response.data.resultats.length > 0) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect  } from 'react';
 import { Container, Header, Card, Icon, Image } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { NavLink  } from 'react-router-dom';
 
@@ -7,6 +8,8 @@ import { NavLink  } from 'react-router-dom';
 const FavorisClient = () => {
     const favorited = true;
     const [salons, setSalons] = useState([]);
+
+    const { user_id } = useParams();
 
     const toggleFavorite = async (idSalon) => {
         try {
@@ -18,7 +21,7 @@ const FavorisClient = () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        idClient: 2,
+                        idClient: user_id,
                         idSalon
                     })
                 });
@@ -41,8 +44,7 @@ const FavorisClient = () => {
           try {
             const response = await axios.get('http://localhost:3000/voirsalonFavorisParidclient', {
                 params: {
-                    // id: props.match.params.id 
-                    idClient: 2
+                    idClient: user_id
                   }
             });
             setSalons(response.data);
@@ -59,7 +61,7 @@ const FavorisClient = () => {
         <Container style={{ marginTop: '8em', width: '100%' }}>
             <Header as="h1" textAlign="center" style={{ fontSize: '8em' }}>Mes Favoris</Header>
             <Card.Group  centered style={{ marginTop: '5em', marginBottom: '3em' }}>
-                {salons.map((salon, index) => {
+                {salons.map((salon, _) => {
                      const blob = new Blob([new Uint8Array(salon.photoProfil.data)])
                      const url = URL.createObjectURL(blob)
  

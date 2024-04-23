@@ -21,6 +21,9 @@ const ClientFinal = () => {
           <Route path="/login" element={<LoginForm/>} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/home/:user_id" element={<HomeClient/>} />
+          <Route path="/profil/:user_id" element={<ProfilClient/>} />
+          <Route path="/reservations/:user_id" element={<ReservationsClient/>} />
+          <Route path="/favoris/:user_id" element={<FavorisClient/>} />
         </Routes>
       </Router>
     );

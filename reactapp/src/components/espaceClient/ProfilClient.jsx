@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Container, Header, Segment, Grid, Image, Icon, Label, Button, Input, Message } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -11,13 +12,14 @@ const ProfilClient = (props) => {
     const [photo, setPhoto] = useState('')
     const [successMessage, setSuccessMessage] = useState('');
 
+    const { user_id } = useParams();
+
     useEffect(() => {
         const fetchclientDetails = async () => {
           try {
             const response = await axios.get('http://localhost:3000/getClientparID', {
               params: {
-                // id: props.match.params.id 
-                id: 4
+                id: user_id
               }
             });
             setPrenom(response.data[0].PrenomClient)

@@ -27,6 +27,7 @@ const LoginForm = () => {
         console.log('[+]', data);
         const  token  = data.token;
         sessionStorage.setItem('token', token);
+        sessionStorage.setItem('idUtilisateur', data.userID);
         navigate(`/home/${data.userID}`);
       } else {
           console.error('Error', response.statusText);

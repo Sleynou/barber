@@ -95,7 +95,7 @@ const HomeClient = () => {
             <Header as="h1" textAlign="center" style={{ fontSize: '8em' }}>Salons de Coiffure</Header>
             {salons.length > 0 && (
         <Card.Group centered style={{ marginTop: '5em', marginBottom: '3em' }}>
-            {salons.map((salon, index) => {
+            {salons.map((salon, _) => {
                 const blob = new Blob([new Uint8Array(salon.photoProfil.data)])
                 const url = URL.createObjectURL(blob)
 
