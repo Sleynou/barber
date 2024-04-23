@@ -1,29 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Header, Segment, Grid, Image, Icon, Rating, Button } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
+import { Container, Header, Segment, Grid, Image, Icon, Rating, Button, Form, Label, TextArea } from 'semantic-ui-react';
 import axios from 'axios';
 
-const DetailsSalon = (props) => {
+const DetailsSalon = () => {
   const [salonDetails, setSalonDetails] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [etoilesClient, setEtoilesClient] = useState(0)
+  const [commentaireClient, setCommentaireClient] = useState('')
+  const [page, setPage] = useState(1);
+  const reviewsPerPage = 5;
 
+  const idUser = sessionStorage.getItem('idUtilisateur');
+  console.log(idUser);
+  const { salon_id } = useParams();
+  
   useEffect(() => {
     const fetchSalonDetails = async () => {
       try {
         const response = await axios.get('http://localhost:3000/getSalonsparID', {
           params: {
-            // id: props.match.params.id 
-            id: 1
+            id: salon_id
           }
         });
         setSalonDetails(response.data);
         console.log(response.data);
+
+        const favoriteResponse = await axios.get('http://localhost:3000/voirsalonFavorisParidclient', {
+          params: {
+            idClient: idUser,
+          }
+        });
+        console.log(favoriteResponse.data);
+        favoriteResponse.data.forEach(element => {
+          if(element.idSalon === parseInt(salon_id)){
+              setIsFavorite(true)
+              console.log(isFavorite);
+          }
+        });
       } catch (error) {
         console.error('Erreur lors de l obtention de l info du Salon', error);
       }
     };
 
     fetchSalonDetails();
-  }, []); 
- 
+  }, [salon_id]);
+  
+  const handleToggleFavorite = async () => {
+    try {
+      if (isFavorite) {
+        await axios.delete('http://localhost:3000/deleteSalonFavorisParidClientidSalon', {
+          params: {
+            idClient: idUser,
+            idSalon: parseInt(salon_id)
+          }
+        });
+      } else {
+        await axios.post('http://localhost:3000/enregistrerSalonFavoris', {
+          idClient: idUser,
+          idSalon: salon_id
+        });
+      }
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
+
+  const handleDonnerAvis = async () => {
+    try {
+      console.log(etoilesClient);
+        await axios.post('http://localhost:3000/enregistrerAvis', {
+          // idClient, idSalonCoiffure, etoiles, commentaire
+          idClient: idUser,
+          idSalonCoiffure: salon_id,
+          etoiles: etoilesClient,
+          commentaire: commentaireClient 
+        });
+        window.location.reload()
+      } catch (error) {
+      console.error('Erreur au moment de faire un commentaire', error);
+    }
+  };
+
+  const getCurrentReviews = () => {
+    const startIndex = (page - 1) * reviewsPerPage;
+    const endIndex = startIndex + reviewsPerPage;
+    return salonDetails.reviews.slice(startIndex, endIndex);
+  };
 
   return (
     <Container style={{ marginTop: '9em', marginBottom: '8em' }}>
@@ -48,7 +112,9 @@ const DetailsSalon = (props) => {
                 <p style={{marginBottom: '2em'}}><Icon name='phone' /> <b>Telephone:</b> {salonDetails.salon[0].telephoneSalon}</p>
                 <p style={{marginBottom: '2em'}}><Icon name='map marker alternate' /> <b>Adresse:</b> {salonDetails.salon[0].adresse}</p>
                 <Button color='blue' circular > Prendre RDV </Button>
-                <Button color='red' circular > Ajouter à mes Favoris </Button>
+                <Button color='red' circular onClick={handleToggleFavorite}>
+                  {isFavorite ? 'Enlever des favoris' : 'Ajouter à mes Favoris'}
+                </Button>
               </Grid.Column>
 
               <Grid.Column width={16} textAlign='left'>
@@ -70,12 +136,37 @@ const DetailsSalon = (props) => {
 
               <Grid.Column width={16} textAlign='left'>
                 <Header as="h1">Reviews</Header>
-                {salonDetails.reviews.map((review, index) => (
-                    <div key={index} style={{ marginBottom: '2em' }}>
-                        <Rating icon='star' rating={review.etoiles} maxRating={5} disabled />
-                        <p>{review.commentaire}</p>
-                    </div>
+                <Button
+                  disabled={page === 1}
+                  onClick={() => setPage(page - 1)}
+                  icon='chevron left'
+                  circular
+                />
+                <Button
+                  disabled={salonDetails.reviews.length <= page * reviewsPerPage}
+                  onClick={() => setPage(page + 1)}
+                  icon='chevron right'
+                  circular
+                  style={{marginBottom: "2em"}}
+                />
+                {getCurrentReviews().map((review, index) => (
+                  <div key={index} style={{ marginBottom: '2em' }}>
+                    <Rating icon='star' rating={review.etoiles} maxRating={5} disabled />
+                    <p>{review.commentaire}</p>
+                  </div>
                 ))}
+                
+                <Form style={{marginBottom: "2em"}}>
+                  <Form.Field>
+                    <Label>Notez le salon</Label>
+                    <Rating icon='star' maxRating={5} onRate = {(e, {rating}) => {setEtoilesClient(rating)}} />
+                  </Form.Field>
+                  <Form.Field>
+                    <Label>Commentaire</Label>
+                    <TextArea onChange = {(e) => {setCommentaireClient(e.target.value)}}/>
+                  </Form.Field>
+                  <Button color='blue' circular onClick={handleDonnerAvis}>Donner votre avis</Button>
+                </Form>
               </Grid.Column>
 
             </Grid>

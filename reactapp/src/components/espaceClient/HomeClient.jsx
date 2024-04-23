@@ -108,7 +108,7 @@ const HomeClient = () => {
                             boxShadow: '0 4px 8px rgba(0, 0, 0, .5)'
                             }}
                             onClick={()=>{
-                                navigate(`/getDetailsSalon?id=${salon.idSalon}`)
+                                navigate(`/detailsSalon/${salon.idSalon}`)
                             }}>
 
                             <Image src={url} style={{ height: '350px' }} />

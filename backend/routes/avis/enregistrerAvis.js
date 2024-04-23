@@ -7,10 +7,11 @@ const router = express.Router()
 app.use(bodyParser.json())
 const checkBlacklist = require('../checkBlacklist')
 
-router.post('/enregistrerAvis', checkBlacklist, async (req, res) => {
+router.post('/enregistrerAvis', async (req, res) => {
     try {
       const { idClient, idSalonCoiffure, etoiles, commentaire } = req.body
-        
+      
+      console.log(idClient, idSalonCoiffure, etoiles, commentaire);
       // insérer Avis dans la base de données
       await insertAvis(idClient, idSalonCoiffure, etoiles, commentaire)
   
