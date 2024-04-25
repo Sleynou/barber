@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Header, Segment, Grid, Image, Icon, Rating, Button, Form, Label, TextArea } from 'semantic-ui-react';
+import { Container, Header, Segment, Grid, Image, Icon, Rating, Button, Form, Label, TextArea, Popup, Select, Checkbox } from 'semantic-ui-react';
 import axios from 'axios';
 
 const DetailsSalon = () => {
@@ -8,8 +8,26 @@ const DetailsSalon = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [etoilesClient, setEtoilesClient] = useState(0)
   const [commentaireClient, setCommentaireClient] = useState('')
+
+  const [services, setServices] = useState([]);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const [serviceChoisi, setserviceChoisi] = useState(false);
+
+  const [coiffeurs, setCoiffeurs] = useState([]);
+  const [selectedCoiffeurId, setSelectedCoiffeurId] = useState(0);
+  const [coiffeurChoisi, setcoiffeurChoisi] = useState(false);
+
+  const [coiffeurAvailability, setCoiffeurAvailability] = useState([]);
+  const [coiffeurAvailabilityTime, setCoiffeurAvailabilityTime] = useState([]);
+
+  const [dateRDV, setdateRDV] = useState('')
+  const [dateChoisi, setdateChoisi] = useState(false);
+  
+
   const [page, setPage] = useState(1);
   const reviewsPerPage = 5;
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const idUser = sessionStorage.getItem('idUtilisateur');
   console.log(idUser);
@@ -38,6 +56,23 @@ const DetailsSalon = () => {
               console.log(isFavorite);
           }
         });
+
+        const fetchServices = await axios.get('http://localhost:3000/voirServicesParidSalon', {
+          params: {
+            idSalon: salon_id
+          }
+        })
+        console.log(fetchServices.data);
+        setServices(fetchServices.data)
+
+        const fetchCoiffeurs = await axios.get('http://localhost:3000/voirCoiffeurParIDSalon', {
+          params: {
+            IDSalon: salon_id
+          }
+        })
+        console.log(fetchCoiffeurs.data);
+        setCoiffeurs(fetchCoiffeurs.data)
+
       } catch (error) {
         console.error('Erreur lors de l obtention de l info du Salon', error);
       }
@@ -89,6 +124,101 @@ const DetailsSalon = () => {
     return salonDetails.reviews.slice(startIndex, endIndex);
   };
 
+  const handelPopupClose = () => {
+    setShowPopup(false)
+    setserviceChoisi(false)
+    setcoiffeurChoisi(false)
+    setdateChoisi(false)
+  }
+
+  const handleDateDispoCoiffeur = async () => {
+    try {
+      setcoiffeurChoisi(true)
+      console.log(selectedCoiffeurId);
+      const fetchDateDispoCoiffeurs = await axios.get('http://localhost:3000/DispoCoiffeur', {
+          params: {
+            idCoiffeur: selectedCoiffeurId
+          }
+        })
+        console.log(fetchDateDispoCoiffeurs.data.resultatsFinaux);
+        setCoiffeurAvailability(fetchDateDispoCoiffeurs.data.resultatsFinaux)
+    }catch(error) {
+      console.error('Erreur fetching l horaire du coiffeur', error);
+    }
+  }
+
+  const isHeurePrise = (heureRDV, rendezVous) => {
+    for (const rdv of rendezVous) {
+      const debutRdv = rdv.heure;
+      const finRdv = sommeMin(debutRdv, rdv.duree);
+      if (heureRDV >= debutRdv && heureRDV < finRdv) {
+        return true; 
+      }
+    }
+    return false;
+  };
+
+  const handleHeureDispo =  async (date, debutshift, finshift, pausedebut, PauseFin) => {
+    try{
+      setdateRDV(date)
+      console.log('Date', dateRDV);
+      let rdvDuCoiffeur = []
+      let heure = debutshift
+      const heuresDisponibles = []
+
+      const fetchRdvCoiffeurDansLaJournee = await axios.get('http://localhost:3000/RDVCoiffeurJournee', {
+          params: {
+            idCoiffeur: selectedCoiffeurId,
+            dateRDV: dateRDV
+          }
+        })
+        console.log(fetchRdvCoiffeurDansLaJournee.data.resultatsFinaux);
+        rdvDuCoiffeur.push(fetchRdvCoiffeurDansLaJournee.data.resultatsFinaux)
+
+      const fetchServiceParID = await axios.get('http://localhost:3000/getServiceParId', {
+          params: {
+            idService: selectedServiceId
+          }
+        })
+        console.log(fetchServiceParID.data);
+        const duree = fetchServiceParID.data.duree
+
+        while (heure < pausedebut) {
+          const heureFinService1 = sommeMin(heure, duree);
+          console.log(heureFinService1);
+          if (!isHeurePrise(heure, rdvDuCoiffeur) && heureFinService1 <= pausedebut) {
+            heuresDisponibles.push(heure);
+          }
+          heure = sommeMin(heure, duree); 
+        }
+      
+        heure = PauseFin; 
+        while (heure < finshift) {
+          const heureFinService2 = sommeMin(heure, duree);
+          if (!isHeurePrise(heure, rdvDuCoiffeur) && heureFinService2 <= finshift) {
+            heuresDisponibles.push(heure);
+          }
+          heure = sommeMin(heure, 30); 
+        }
+        setCoiffeurAvailabilityTime(heuresDisponibles)
+        setdateChoisi(true)
+
+    }catch(error) {
+      console.error('Erreur fetching l heure du coiffeur', error);
+    }
+
+  }
+
+  const sommeMin = (heure, minutes) => {
+    console.log('Heure', heure);
+    const [hh, mm] = heure.split(':').map(Number);
+    const totalMinutes = hh * 60 + mm + minutes;
+    const newHeure = Math.floor(totalMinutes / 60).toString().padStart(2, '0');
+    const newMinute = (totalMinutes % 60).toString().padStart(2, '0');
+    console.log('aaa', newHeure);
+    // return `${newHeure}:${newMinute}`;
+  };
+
   return (
     <Container style={{ marginTop: '9em', marginBottom: '8em' }}>
       {salonDetails.hasOwnProperty('salon') && (
@@ -111,12 +241,98 @@ const DetailsSalon = () => {
                 <p style={{marginBottom: '2em'}}><Icon name='mail' /> <b>Email:</b> {salonDetails.salon[0].Email}</p>
                 <p style={{marginBottom: '2em'}}><Icon name='phone' /> <b>Telephone:</b> {salonDetails.salon[0].telephoneSalon}</p>
                 <p style={{marginBottom: '2em'}}><Icon name='map marker alternate' /> <b>Adresse:</b> {salonDetails.salon[0].adresse}</p>
-                <Button color='blue' circular > Prendre RDV </Button>
+
+                <Button color='blue' circular onClick={() => setShowPopup(true)}> Prendre RDV </Button>
+
+                {showPopup && (
+                  <Popup
+                    open
+                    onClose={handelPopupClose}
+                    trigger={<span> </span>}
+                    position='bottom center'
+                    style={{ maxWidth: '900px', borderRadius: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}
+                  >
+                  {serviceChoisi ? (
+                    coiffeurChoisi ? (
+                        dateChoisi ? (
+                          <>
+                          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '-2.5em' }}>
+                            <Button icon='close' onClick={handelPopupClose} circular style={{ background: 'none', border: 'none', boxShadow: 'none', color: '#999999', padding: '0' }} />
+                          </div>
+                          <Header as="h1" style={{marginBottom: '0.5em', fontSize: '2.5em'}}>Selectionner une heure</Header>
+                          <Grid columns={3}>
+                            {coiffeurAvailabilityTime.map(heure => (
+                              <Grid.Column key={heure}>
+                                <Button style={{ marginBottom: '5px', marginRight: '-4em' }} key={heure} onClick={() => {}} circular color='blue'>{heure}</Button>
+                              </Grid.Column>
+                            ))}
+                          </Grid>
+                        </>
+                        ) : (
+                          <>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '-2.5em' }}>
+                              <Button icon='close' onClick={handelPopupClose} circular style={{ background: 'none', border: 'none', boxShadow: 'none', color: '#999999', padding: '0' }} />
+                            </div>
+                            <Header as="h1" style={{marginBottom: '0.5em', fontSize: '2.5em'}}>Selectionner une date</Header>
+                            <Grid columns={3}>
+                              {coiffeurAvailability.map(({ DateDispo, debutShift, finShift, PauseDebut, PauseFin }) => (
+                                <Grid.Column key={DateDispo}>
+                                  <Button style={{ marginBottom: '5px', marginRight: '-3em' }} key={DateDispo} onClick={() => {handleHeureDispo(DateDispo, debutShift, finShift, PauseDebut, PauseFin)}} circular color='blue'>{DateDispo}</Button>
+                                </Grid.Column>
+                              ))}
+                            </Grid>
+                          </>
+                        )
+                    ) : (
+                      <>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+                        <Button icon='close' onClick={handelPopupClose} circular style={{ background: 'none', border: 'none', boxShadow: 'none', color: '#999999', padding: '0' }} />
+                      </div>
+                      <Header as="h1" style={{marginBottom: '0.5em', fontSize: '2.5em'}}>Selectionner un coiffeur</Header>
+                      <Select placeholder='Seleccionner un coiffeur'
+                        options={coiffeurs.map(coiffeur => ({
+                          key: coiffeur.iDCoiffeur,
+                          value: coiffeur.iDCoiffeur,
+                          text: `${coiffeur.PrenomCoiffeur} ${coiffeur.NomCoiffeur}`,
+                          content: (
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                              <Image src={'/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_withou_3.jpg'} circular size='small' style={{ marginRight: '10px' }} />
+                              <span>{coiffeur.PrenomCoiffeur} {coiffeur.NomCoiffeur}</span>
+                            </div>
+                          )
+                        }))}
+                        value={selectedCoiffeurId}
+                        onChange={(e, { value }) => {
+                          if (value !== null) {
+                            setSelectedCoiffeurId(value);
+                          }
+                        }}
+                      />
+                      <Button style={{marginBottom: '0.5em', marginLeft: '4em'}} color='blue' onClick={handleDateDispoCoiffeur}>Continuer</Button>
+                   </>
+                    )
+                  ) : (
+                    <>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
+                        <Button icon='close' onClick={handelPopupClose} circular style={{ background: 'none', border: 'none', boxShadow: 'none', color: '#999999', padding: '0' }} />
+                      </div>
+                      <Header as="h1" style={{marginBottom: '0.5em', fontSize: '2.5em'}}>Selectionner un service</Header>
+                      <Select placeholder='Seleccionner un service'
+                      options={services.map(service => ({ key: service.idService, value: service.idService, text: `${service.nom} - Prix: ${service.prix}$ - Durée: ${service.duree}` }))}
+                      onChange={(e, { value }) => setSelectedServiceId(value)} />
+                    
+                    <Button style={{marginBottom: '0.5em', marginLeft: '4em'}} color='blue' onClick={() => setserviceChoisi(true)  }>Continuer</Button>
+                    </>
+                  )}
+                  </Popup>
+                )}
+              
                 <Button color='red' circular onClick={handleToggleFavorite}>
                   {isFavorite ? 'Enlever des favoris' : 'Ajouter à mes Favoris'}
                 </Button>
-              </Grid.Column>
 
+              </Grid.Column>
+              
               <Grid.Column width={16} textAlign='left'>
                 <Header as="h1">Images</Header>
                 <Grid stackable columns={5}>

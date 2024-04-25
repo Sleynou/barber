@@ -4,9 +4,9 @@ const router = express.Router();
 const checkBlacklist = require('../checkBlacklist')
 
 // Ruta que permite a los usuarios recuperar la lista de servicios registrados con sus detalles.
-router.get('/voirServicesParidSalon',checkBlacklist, async (req, res) => {
+router.get('/voirServicesParidSalon', async (req, res) => {
   try {
-    const { idSalon } = req.body; // Corregido para obtener idSalon de req.body
+    const { idSalon } = req.query; // Corregido para obtener idSalon de req.body
     const services = await db('Services').select('*').where({ idSalon: idSalon }); // Corregido para usar la condición adecuada
     res.send(services);
   } catch (error) {

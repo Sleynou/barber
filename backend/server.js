@@ -33,6 +33,7 @@ const enregistrerService = require('./routes/service/enregistrerService')
 const modifierService = require('./routes/service/modifierService')
 const deleteService = require('./routes/service/deleteService')
 const voirServicesParidSalon = require('./routes/service/voirServicesParidSalon') 
+const getServiceParID = require('./routes/service/getServiceParID')
 
 // Routes Avis
 const enregistrerAvis = require('./routes/avis/enregistrerAvis')
@@ -50,6 +51,7 @@ const consulterRdvCSalon = require('./routes/rendezVous/consulterRdvSalon')
 const modifierRendezVous = require('./routes/rendezVous/modiferRendezVous')
 const prendreRendezVous = require('./routes/rendezVous/prendreRendezVous')
 const annulerRdvClient = require('./routes/rendezVous/annulerRdvClient')
+const consulterRdvCoiffeurJournee = require('./routes/rendezVous/consulterRdvCoiffeurJournee')
 
 // Routes DispoCoiffeur
 const ajouterDispoCoiffeur = require('./routes/disponibiliteCoiffeur/ajouterDispoCoiffeur')
@@ -105,6 +107,7 @@ app.use('/', enregistrerService)
 app.use('/', voirServicesParidSalon)
 app.use('/', modifierService)
 app.use('/', deleteService)
+app.use('/', getServiceParID)
 
 app.use('/', enregistrerAvis)
 app.use('/', voirAvisParidSalonCoiffure)
@@ -113,13 +116,13 @@ app.use('/', enregistrerSalonFavoris)
 app.use('/', voirSalonFavorisParidClient)
 app.use('/',deleteSalonFavorisParidClientidSalon)
 
-
 app.use('/', consulterRdvClient)
 app.use('/', consulterRdvCoiffeur)
 app.use('/', consulterRdvCSalon)
 app.use('/', modifierRendezVous)
 app.use('/', prendreRendezVous)
 app.use('/', annulerRdvClient)
+app.use('/', consulterRdvCoiffeurJournee)
 
 app.use('/', ajouterDispoCoiffeur)
 app.use('/', consulterDispoCoiffeur)
