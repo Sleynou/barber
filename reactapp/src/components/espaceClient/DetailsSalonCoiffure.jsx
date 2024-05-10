@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Header, Segment, Grid, Image, Icon, Rating, Button, Form, Label, TextArea, Popup, Select, Checkbox } from 'semantic-ui-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Header, Segment, Grid, Image, Icon, Rating, Button, Form, Label, TextArea, Popup, Select } from 'semantic-ui-react';
 import axios from 'axios';
 
 const DetailsSalon = () => {
@@ -33,6 +33,8 @@ const DetailsSalon = () => {
   console.log(idUser);
   const { salon_id } = useParams();
   
+  const navigate = useNavigate()
+
   useEffect(() => {
     const fetchSalonDetails = async () => {
       try {
@@ -147,33 +149,24 @@ const DetailsSalon = () => {
     }
   }
 
-  const isHeurePrise = (heureRDV, rendezVous) => {
-    for (const rdv of rendezVous) {
-      const debutRdv = rdv.heure;
-      const finRdv = sommeMin(debutRdv, rdv.duree);
-      if (heureRDV >= debutRdv && heureRDV < finRdv) {
-        return true; 
-      }
-    }
-    return false;
-  };
-
   const handleHeureDispo =  async (date, debutshift, finshift, pausedebut, PauseFin) => {
     try{
       setdateRDV(date)
       console.log('Date', dateRDV);
+      console.log(debutshift);
       let rdvDuCoiffeur = []
-      let heure = debutshift
-      const heuresDisponibles = []
 
       const fetchRdvCoiffeurDansLaJournee = await axios.get('http://localhost:3000/RDVCoiffeurJournee', {
           params: {
             idCoiffeur: selectedCoiffeurId,
-            dateRDV: dateRDV
+            dateRDV: date
           }
         })
         console.log(fetchRdvCoiffeurDansLaJournee.data.resultatsFinaux);
-        rdvDuCoiffeur.push(fetchRdvCoiffeurDansLaJournee.data.resultatsFinaux)
+        fetchRdvCoiffeurDansLaJournee.data.resultatsFinaux.forEach(element => {
+          console.log('aaaaaaaaaaaaaaaaaaaaaaaa',element.dateRDV === date);
+          if(element.dateRDV === date) {rdvDuCoiffeur.push(element)}
+        });
 
       const fetchServiceParID = await axios.get('http://localhost:3000/getServiceParId', {
           params: {
@@ -181,43 +174,48 @@ const DetailsSalon = () => {
           }
         })
         console.log(fetchServiceParID.data);
-        const duree = fetchServiceParID.data.duree
+        const duree = fetchServiceParID.data[0].duree
 
-        while (heure < pausedebut) {
-          const heureFinService1 = sommeMin(heure, duree);
-          console.log(heureFinService1);
-          if (!isHeurePrise(heure, rdvDuCoiffeur) && heureFinService1 <= pausedebut) {
-            heuresDisponibles.push(heure);
+        const fetchHoraireCoiffeur = await axios.get('http://localhost:3000/obtenirHoraire', {
+          params: {
+            debutshift,
+            finshift,
+            pausedebut, 
+            PauseFin, 
+            rdvDuCoiffeur: JSON.stringify(rdvDuCoiffeur), 
+            duree
           }
-          heure = sommeMin(heure, duree); 
-        }
-      
-        heure = PauseFin; 
-        while (heure < finshift) {
-          const heureFinService2 = sommeMin(heure, duree);
-          if (!isHeurePrise(heure, rdvDuCoiffeur) && heureFinService2 <= finshift) {
-            heuresDisponibles.push(heure);
-          }
-          heure = sommeMin(heure, 30); 
-        }
-        setCoiffeurAvailabilityTime(heuresDisponibles)
+        })
+        console.log(fetchHoraireCoiffeur.data);
+        setCoiffeurAvailabilityTime(fetchHoraireCoiffeur.data.heuresDisponibles);
         setdateChoisi(true)
-
+        
     }catch(error) {
       console.error('Erreur fetching l heure du coiffeur', error);
     }
 
   }
 
-  const sommeMin = (heure, minutes) => {
-    console.log('Heure', heure);
-    const [hh, mm] = heure.split(':').map(Number);
-    const totalMinutes = hh * 60 + mm + minutes;
-    const newHeure = Math.floor(totalMinutes / 60).toString().padStart(2, '0');
-    const newMinute = (totalMinutes % 60).toString().padStart(2, '0');
-    console.log('aaa', newHeure);
-    // return `${newHeure}:${newMinute}`;
-  };
+  const handleReserverPlace = async (heure) => {
+    try {
+      const fetchReserverPlaceRDV = await axios.post('http://localhost:3000/prendreRDV', {
+        idSalonCoiffure: salon_id, 
+        idClient: idUser, 
+        idService: selectedServiceId, 
+        idCoiffeur: selectedCoiffeurId, 
+        dateRDV, 
+        heure
+        })
+      console.log(fetchReserverPlaceRDV.data);
+      alert('[+] Votre Rendez Vous a ete pris avec succes')
+      navigate(`/reservations/${idUser}`)
+
+    } catch(error){
+      console.error('[-] Erreur', error);
+    }
+  }
+
+ 
 
   return (
     <Container style={{ marginTop: '9em', marginBottom: '8em' }}>
@@ -263,7 +261,7 @@ const DetailsSalon = () => {
                           <Grid columns={3}>
                             {coiffeurAvailabilityTime.map(heure => (
                               <Grid.Column key={heure}>
-                                <Button style={{ marginBottom: '5px', marginRight: '-4em' }} key={heure} onClick={() => {}} circular color='blue'>{heure}</Button>
+                                <Button style={{ marginBottom: '5px', marginRight: '-4em' }} key={heure} onClick={() => {handleReserverPlace(heure)}} circular color='blue'>{heure}</Button>
                               </Grid.Column>
                             ))}
                           </Grid>
