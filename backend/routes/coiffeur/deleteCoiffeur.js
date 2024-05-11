@@ -7,7 +7,7 @@ const router = express.Router()
 app.use(bodyParser.json())
 const checkBlacklist = require('../checkBlacklist')
 
-router.delete('/deleteCoiffeur', checkBlacklist, async (req, res) => {
+router.delete('/deleteCoiffeur', async (req, res) => {
     try {
         const { Email } = req.body;
         

@@ -27,6 +27,7 @@ const modifierCoiffeur = require('./routes/coiffeur/modifierCoiffeur')
 const voirCoiffeurParIDSalon = require('./routes/coiffeur/voirCoiffeurParIDSalon')
 const logoutCoiffeur = require('./routes/coiffeur/logoutCoiffeur')
 const deleteCoiffeur = require('./routes/coiffeur/deleteCoiffeur')
+const getCoiffeurparID = require('./routes/coiffeur/getCoiffeuparID')
 
 // Routes Services
 const enregistrerService = require('./routes/service/enregistrerService')
@@ -38,6 +39,7 @@ const getServiceParID = require('./routes/service/getServiceParID')
 // Routes Avis
 const enregistrerAvis = require('./routes/avis/enregistrerAvis')
 const voirAvisParidSalonCoiffure = require('./routes/avis/voirAvisParidSalonCoiffure')
+const voirAvisParodCoiffeur = require('./routes/avis/voirAvisParidCoiffeur')
 
 // Routes SalonFavoris
 const enregistrerSalonFavoris = require('./routes/SalonFavoris/enregistrerSalonFavoris')
@@ -69,6 +71,9 @@ const modifierDiposSalon = require('./routes/disponibiliteSalon/modifierDiposSal
 const imageUpload = require('./imageUpload')
 const getImageClient = require('./getImageClient')
 
+const imageUploadCoiffeur = require('./imageUploadCoiffeur')
+const getImageCoiffeur = require('./getImageCoiffeur')
+
 const corsOrigin = 'http://localhost:3001';
 app.use(cors({
   origin:[corsOrigin],
@@ -81,6 +86,9 @@ app.use(bodyParser.json());
 
 app.use('/', imageUpload)
 app.use('/', getImageClient)
+
+app.use('/', imageUploadCoiffeur)
+app.use('/', getImageCoiffeur)
 
 app.use('/', registerClient)
 app.use('/', loginClient)
@@ -103,6 +111,7 @@ app.use('/', modifierCoiffeur)
 app.use('/', voirCoiffeurParIDSalon)
 app.use('/', logoutCoiffeur)
 app.use('/', deleteCoiffeur)
+app.use('/', getCoiffeurparID)
 
 app.use('/', enregistrerService)
 app.use('/', voirServicesParidSalon)
@@ -112,6 +121,7 @@ app.use('/', getServiceParID)
 
 app.use('/', enregistrerAvis)
 app.use('/', voirAvisParidSalonCoiffure)
+app.use('/', voirAvisParodCoiffeur)
 
 app.use('/', enregistrerSalonFavoris)
 app.use('/', voirSalonFavorisParidClient)

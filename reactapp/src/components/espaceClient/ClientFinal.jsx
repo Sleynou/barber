@@ -1,4 +1,3 @@
-import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import AccueilClient from './AccueilClient';
@@ -10,7 +9,7 @@ import LoginForm from './LoginForm'
 import ProfilClient from './ProfilClient';
 import RegisterForm from './RegisterForm';
 import ReservationsClient from './ReservationsClient';
-import Footer from './Footer'
+// import Footer from './Footer'
 
 const ClientFinal = () => {
     return (

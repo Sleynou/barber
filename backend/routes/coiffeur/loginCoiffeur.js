@@ -38,8 +38,9 @@ router.post('/loginCoiffeur', async (req, res) => {
       // Formater la date y l'heure de expiration
       const expirationTime = expirationDate.toLocaleTimeString()
       const expirationDateTime = expirationDate.toLocaleDateString() + ' ' + expirationTime
-  
-      res.json({ message: 'Connexion réussie', token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
+      const coiffeurID = user.iDCoiffeur
+
+      res.json({ message: 'Connexion réussie', coiffeurID, token, expiresIn: expiresInSeconds, expirationTime: expirationDateTime })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: 'Une erreur est survenue' })
