@@ -136,14 +136,14 @@ const DetailsSalon = () => {
   const handleDateDispoCoiffeur = async () => {
     try {
       setcoiffeurChoisi(true)
-      console.log(selectedCoiffeurId);
+      console.log('CoiffeurID: ', selectedCoiffeurId);
       const fetchDateDispoCoiffeurs = await axios.get('http://localhost:3000/DispoCoiffeur', {
           params: {
             idCoiffeur: selectedCoiffeurId
           }
         })
-        console.log(fetchDateDispoCoiffeurs.data.resultatsFinaux);
-        setCoiffeurAvailability(fetchDateDispoCoiffeurs.data.resultatsFinaux)
+        console.log('Fechas disponible', fetchDateDispoCoiffeurs.data.resultats);
+        setCoiffeurAvailability(fetchDateDispoCoiffeurs.data.resultats)
     }catch(error) {
       console.error('Erreur fetching l horaire du coiffeur', error);
     }

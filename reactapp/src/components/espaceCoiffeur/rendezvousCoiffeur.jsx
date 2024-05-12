@@ -15,14 +15,14 @@ const ReservationsCoiffeur = () => {
   const [heure, setHeure] = useState('')
   const [editedReservations, setEditedReservations] = useState([]);
 
-  // const { user_id } = useParams();
+  const { coiffeur_id } = useParams();
 
   useEffect(() => {
     const fetchReservations = async () => {
       try {
         const response = await axios.get('http://localhost:3000/RDVCoiffeur', {
           params: {
-            idCoiffeur: 2
+            idCoiffeur: coiffeur_id
           }
         });
         if (response.data.resultats.length > 0) {
@@ -169,32 +169,32 @@ const ReservationsCoiffeur = () => {
                     <Form>
                       <Form.Field>
                         <Label>Salon:</Label>
-                        <Input value={reservation.nomSalon} disabled />
+                        <Input value={reservation.nomSalon}  />
                       </Form.Field>
                       <Form.Field>
                         <Label>Coiffeur:</Label>
-                        <Input value={`${reservation.PrenomCoiffeur} ${reservation.NomCoiffeur}`} disabled />
+                        <Input value={`${reservation.PrenomCoiffeur} ${reservation.NomCoiffeur}`}  />
                       </Form.Field>
                       <Form.Field>
                         <Label>Service:</Label>
-                        <Input value={reservation.nom} disabled />
+                        <Input value={reservation.nom}  />
                       </Form.Field>
                       <Form.Field>
                         <Label>Prix:</Label>
-                        <Input value={reservation.prix} disabled />
+                        <Input value={reservation.prix}  />
                       </Form.Field>
                       <Form.Field>
                         <Label>Date:</Label>
-                        <Input fluid type='date' value={editedReservations[index]?.dateRDV || reservation.dateRDV} /*onChange={(e) => handleDateChangeInput(index, e.target.value)} */disabled/>
+                        <Input fluid type='date' value={editedReservations[index]?.dateRDV || reservation.dateRDV} /*onChange={(e) => handleDateChangeInput(index, e.target.value)} *//>
                       </Form.Field>
                       <Form.Field>
                         <Label>Heure:</Label>
                         {console.log(editedReservations)}
-                        <Input value={editedReservations[index]?.heure || reservation.heure} /*onChange={(e) => handleHeureChange(index, e.target.value)} */disabled/>
+                        <Input value={editedReservations[index]?.heure || reservation.heure} /*onChange={(e) => handleHeureChange(index, e.target.value)} *//>
                       </Form.Field>
                       <Form.Field>
                         <Label>Durée:</Label>
-                        <Input value={reservation.duree} disabled />
+                        <Input value={reservation.duree} />
                       </Form.Field>
                       
                       {/*<Button circular color='blue' onClick={editable ? ()=>{handleModifier(reservation.idRDV, reservation.heure, reservation.dateRDV)} : toggleEditMode} >
