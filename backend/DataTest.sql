@@ -32,8 +32,9 @@ VALUES ('Léa', 'Leroy', 'lea@example.com', 'mdp252627');
 INSERT INTO Client (PrenomClient, NomClient, Email, MotDePasse)
 VALUES ('Hugo', 'Roux', 'hugo@example.com', 'mdp282930');
 
+
 --------------------------------------------------------------------------------------------
-delete from PhotosSalon where idPhoto = 1
+delete from salonCoiffure where idSalon = 4
 --Coiffeurs
 INSERT INTO Coiffeur (IDSalon, PrenomCoiffeur, NomCoiffeur, Email, PhotoCoiffeur, MotDePasse)
 VALUES (1, 'Jean', 'Dupont', 'jean.dupont@example.com', 'jean.jpg', 'mdp123');
