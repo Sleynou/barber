@@ -28,7 +28,7 @@ const ProfilCoiffeur = (props) => {
                 const nom = response.data[0].PhotoCoiffeur
                 console.log(nom);
 
-                const responseImage = await fetch(`http://localhost:3000/file/${nom}`);
+                const responseImage = await fetch(`http://localhost:3000/fileCoiffeur/${nom}`);
                 const arrayBuffer = await responseImage.arrayBuffer();
                 const blob = new Blob([arrayBuffer]);
                 const url = URL.createObjectURL(blob);

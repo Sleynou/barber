@@ -30,7 +30,7 @@ const LoginForm = () => {
         sessionStorage.setItem('idUtilisateur', data.userID);
         navigate(`/home/${data.userID}`);
       } else {
-          console.error('Error', response.statusText);
+        console.error('Erreur', response.status, await response.text());
       }
   } catch (error) {
       console.error('Error', error);

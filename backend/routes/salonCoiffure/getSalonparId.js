@@ -13,7 +13,7 @@ router.get('/getSalonsparID', async (req, res) => {
     console.log(formattedDate);
 
     const salon = await db('SalonCoiffure').select('*').where({idSalon: id});
-    const photos = await db('PhotosSalon').select('picture').where({Salonid: id})
+    const photos = await db('PhotosSalon').select('picture').where({SalonId: id})
     const reviews = await db('Avis'). select('etoiles', 'commentaire').where({idSalonCoiffure: id})
     const horaire = await db('DisponibiliteSalon').select('Ouverture', 'Fermeture').where({idSalon: id, DateDispo: formattedDate})
 

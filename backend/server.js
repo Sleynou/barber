@@ -35,6 +35,7 @@ const modifierService = require('./routes/service/modifierService')
 const deleteService = require('./routes/service/deleteService')
 const voirServicesParidSalon = require('./routes/service/voirServicesParidSalon') 
 const getServiceParID = require('./routes/service/getServiceParID')
+const voirServices = require('./routes/service/voirServices')
 
 // Routes Avis
 const enregistrerAvis = require('./routes/avis/enregistrerAvis')
@@ -74,6 +75,13 @@ const getImageClient = require('./getImageClient')
 const imageUploadCoiffeur = require('./imageUploadCoiffeur')
 const getImageCoiffeur = require('./getImageCoiffeur')
 
+const imageUploadSalon = require('./imageUploadSalon')
+const getImageSalon = require('./getImageSalon')
+
+const ajouterPhotoSalon = require('./ajouterPhotoSalon')
+const getPhotosSalon = require('./getPhotosByID')
+const deletePhotoSalon = require('./deletPhotoparID')
+
 const corsOrigin = 'http://localhost:3001';
 app.use(cors({
   origin:[corsOrigin],
@@ -84,11 +92,18 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use('/', ajouterPhotoSalon)
+app.use('/', getPhotosSalon)
+app.use('/', deletePhotoSalon)
+
 app.use('/', imageUpload)
 app.use('/', getImageClient)
 
 app.use('/', imageUploadCoiffeur)
 app.use('/', getImageCoiffeur)
+
+app.use('/', imageUploadSalon)
+app.use('/', getImageSalon)
 
 app.use('/', registerClient)
 app.use('/', loginClient)
@@ -118,6 +133,7 @@ app.use('/', voirServicesParidSalon)
 app.use('/', modifierService)
 app.use('/', deleteService)
 app.use('/', getServiceParID)
+app.use('/', voirServices)
 
 app.use('/', enregistrerAvis)
 app.use('/', voirAvisParidSalonCoiffure)

@@ -15,7 +15,7 @@ const InscriptionForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-          axios.post('http://localhost:3000/image-upload', image)
+          axios.post('http://localhost:3000/image-upload-coiffeur', image)
           .then(res => {
             console.log('Axios response: ', res)
             

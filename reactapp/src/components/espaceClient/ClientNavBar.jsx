@@ -10,6 +10,7 @@ const ClientNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     navigate('/');

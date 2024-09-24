@@ -7,7 +7,7 @@ const router = express.Router()
 app.use(bodyParser.json())
 const checkBlacklist = require('../checkBlacklist')
 
-router.put('/modifierService', checkBlacklist, async (req, res) => {
+router.put('/modifierService', async (req, res) => {
     try {
         const { idService, idSalon, nom, duree, prix } = req.body;
         

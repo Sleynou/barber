@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 
 router.post('/registerSalon', async (req, res) => {
     try {
-        const { Email, nomSalon, telephoneSalon, adresse, bio, MotDePasse } = req.body;
+        const { Email, nomSalon, telephoneSalon, adresse, bio, MotDePasse, photoProfil } = req.body;
         const user = await getUserSalonByUsername(Email);
         
         if (user) {
@@ -15,7 +15,7 @@ router.post('/registerSalon', async (req, res) => {
         // Hasher le mot de passe
         const hashedPassword = await bcrypt.hash(MotDePasse, 10)
 
-        await insertUserSalon(Email, nomSalon, telephoneSalon, adresse, bio, hashedPassword);
+        await insertUserSalon(Email, nomSalon, telephoneSalon, adresse, bio, hashedPassword, photoProfil);
         res.status(200).json({ message: 'Salon register avec succes' });
     } catch (error) {
         console.error(error);
@@ -33,11 +33,11 @@ async function getUserSalonByUsername(Email) {
       }
 }
 
-async function insertUserSalon(Email, nomSalon, telephoneSalon, adresse, bio, MotDePasse) {
+async function insertUserSalon(Email, nomSalon, telephoneSalon, adresse, bio, MotDePasse, photoProfil) {
     try {
-        await db('SalonCoiffure').insert({ Email, nomSalon, telephoneSalon, adresse, bio, MotDePasse })
+        await db('SalonCoiffure').insert({ Email: Email, nomSalon: nomSalon, telephoneSalon: telephoneSalon, adresse: adresse, bio:bio, MotDePasse: MotDePasse, PhotoSalon: photoProfil })
       } catch (error) {
-        console.error('Erreur lors de l\'insertion de l\'utilisateur dans la base de données:', error)
+        console.error('Erreur lors de l\'insertion du salon dans la base de données:', error)
         throw new Error({ message: 'Erreur lors de l\'insertion de l\'utilisateur dans la base de données' })
       }
 

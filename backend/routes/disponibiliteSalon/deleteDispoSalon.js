@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db');
 const checkBlacklist = require('../checkBlacklist')
 
-router.delete('/DeleteDispoSalon',checkBlacklist,  async (req,res) =>{
+router.delete('/DeleteDispoSalon',  async (req,res) =>{
     try{
         const {idDispoS} = req.body
 

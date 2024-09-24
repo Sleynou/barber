@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import AccueilClient from './AccueilClient';
-import ClientNavbar from './ClientNavbar';
+import ClientNavbar from './clientNavBar';
 import DetailsSalonCoiffure from './DetailsSalonCoiffure'
 import FavorisClient from './FavorisClient'
 import HomeClient from './HomeClient'

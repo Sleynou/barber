@@ -18,7 +18,7 @@ const HeaderCoiffeur = () => {
   return (
     <Menu fixed="top" borderless size="massive">
       <Container style={{width: "100%", paddingLeft: "2%", paddingRight: '3%'}}>
-        <Menu.Item as="a"  href="/" header>
+        <Menu.Item as={NavLink} to="/" header>
           <img src="../img/logo.png" alt="logo" />
           ElBarber
         </Menu.Item>

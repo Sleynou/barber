@@ -15,7 +15,7 @@ router.get('/DispoCoiffeur' ,async (req,res) =>{
         }
 
         const resultats = await db('DisponibiliteCoiffeur')
-            .select('DisponibiliteSalon.DateDispo', 'DisponibiliteCoiffeur.debutShift', 'DisponibiliteCoiffeur.finShift', 'DisponibiliteCoiffeur.PauseDebut', 'DisponibiliteCoiffeur.PauseFin')
+            .select('DisponibiliteCoiffeur.idDispoC', 'DisponibiliteSalon.DateDispo', 'DisponibiliteCoiffeur.debutShift', 'DisponibiliteCoiffeur.finShift', 'DisponibiliteCoiffeur.PauseDebut', 'DisponibiliteCoiffeur.PauseFin')
             .where({'DisponibiliteCoiffeur.idCoiffeur': idCoiffeur})
             .join('DisponibiliteSalon', 'DisponibiliteCoiffeur.idDispoS', '=', 'DisponibiliteSalon.idDispoS')
 

@@ -4,10 +4,10 @@ const router = express.Router();
 const checkBlacklist = require('../checkBlacklist')
 
 // Route permettant aux utilisateurs salon coiffure de récupérer la liste des avis enregistrés avec leurs détails."
-router.get('/voirAvisParidSalonCoiffure',checkBlacklist, async (req, res) => {
+router.get('/voirAvisParidSalonCoiffure', async (req, res) => {
   try {
-    const { idSalonCoiffure } = req.body; 
-    const listeAvis = await db('Avis').select('*').where({ idSalonCoiffure: idSalonCoiffure }); 
+    const { idSalonCoiffure } = req.query; 
+    const listeAvis = await db('Avis').select('*').join('Client', 'Avis.idClient', 'Client.IDclient').where({ idSalonCoiffure: idSalonCoiffure }); 
     res.send(listeAvis);
   } catch (error) {
     console.error('Error al recuperar los datos de la base de datos:', error);

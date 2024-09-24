@@ -81,7 +81,19 @@ const HomeClient = () => {
                 console.log(updatedFavoritedMap);
                 setFavoritedMap(updatedFavoritedMap);
     
-                setSalons(allSalons);
+                const listep = await Promise.all(allSalons.map(async (element) => {
+                    const nom = element.PhotoSalon;
+                    console.log(nom);
+    
+                    const responseImage = await fetch(`http://localhost:3000/fileSalon/${nom}`);
+                    const arrayBuffer = await responseImage.arrayBuffer();
+                    const blob = new Blob([arrayBuffer]);
+                    const url = URL.createObjectURL(blob);
+                    return { url: url }
+                }));
+
+                setSalons({allSalons, listep});  
+                console.log('Prueba Salones:', salons);          
             } catch (error) {
                 console.error('Error lors de l obtention des salons:', error);
             }
@@ -93,11 +105,9 @@ const HomeClient = () => {
     return (
         <Container style={{ marginTop: '8em', width: '100%' }}>
             <Header as="h1" textAlign="center" style={{ fontSize: '8em' }}>Salons de Coiffure</Header>
-            {salons.length > 0 && (
+            {salons.allSalons && salons.allSalons.length > 0 && (
         <Card.Group centered style={{ marginTop: '5em', marginBottom: '3em' }}>
-            {salons.map((salon, _) => {
-                const blob = new Blob([new Uint8Array(salon.photoProfil.data)])
-                const url = URL.createObjectURL(blob)
+            {salons.allSalons.map((salon, index) => {
 
                 return (
                         <Card key={salon.idSalon} style={{ 
@@ -111,7 +121,7 @@ const HomeClient = () => {
                                 navigate(`/detailsSalon/${salon.idSalon}`)
                             }}>
 
-                            <Image src={url} style={{ height: '350px' }} />
+                            <Image src={salons.listep[index].url} style={{ height: '350px' }} />
 
                             <Icon
                                 name="circle"

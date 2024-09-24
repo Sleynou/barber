@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db');
 const checkBlacklist = require('../checkBlacklist')
 
-router.put('/ModifierDispoSalon',checkBlacklist, async (req,res) =>{
+router.put('/ModifierDispoSalon', async (req,res) =>{
     try{
         const {idDispoS, dateDispo, ouverture, fermeture} = req.body
 

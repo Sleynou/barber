@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Header, Segment, Grid, Image, Icon, Rating, Button, Form, Label, TextArea, Popup, Select } from 'semantic-ui-react';
-import axios from 'axios';
+import axios  from 'axios';
 
 const DetailsSalon = () => {
   const [salonDetails, setSalonDetails] = useState([]);
@@ -29,6 +29,8 @@ const DetailsSalon = () => {
 
   const [showPopup, setShowPopup] = useState(false);
 
+  const [photos, setPhotos] = useState([])
+
   const idUser = sessionStorage.getItem('idUtilisateur');
   console.log(idUser);
   const { salon_id } = useParams();
@@ -43,8 +45,31 @@ const DetailsSalon = () => {
             id: salon_id
           }
         });
-        setSalonDetails(response.data);
-        console.log(response.data);
+        const allSalons = response.data
+        console.log('Informacion del Salon: ', allSalons);
+        const nom = allSalons.salon[0].PhotoSalon;
+        console.log(nom);
+
+        const responseImage = await fetch(`http://localhost:3000/fileSalon/${nom}`);
+        const arrayBuffer = await responseImage.arrayBuffer();
+        const blob = new Blob([arrayBuffer]);
+        const url = URL.createObjectURL(blob);
+      
+        setSalonDetails({allSalons, url});
+        console.log('DetailsSalon: ', salonDetails);
+
+        const listep2 = await Promise.all(allSalons.photos.map(async (element) => {
+          const nom = element.picture;
+          console.log('Lolololo:', nom);
+
+          const responseImage = await fetch(`http://localhost:3000/fileSalon/${nom}`);
+          const arrayBuffer = await responseImage.arrayBuffer();
+          const blob = new Blob([arrayBuffer]);
+          const url = URL.createObjectURL(blob);
+          return { url: url }
+          }));
+          setPhotos(listep2)
+          console.log('Ojooooooo: ', photos);
 
         const favoriteResponse = await axios.get('http://localhost:3000/voirsalonFavorisParidclient', {
           params: {
@@ -86,12 +111,22 @@ const DetailsSalon = () => {
   const handleToggleFavorite = async () => {
     try {
       if (isFavorite) {
-        await axios.delete('http://localhost:3000/deleteSalonFavorisParidClientidSalon', {
-          params: {
-            idClient: idUser,
-            idSalon: parseInt(salon_id)
-          }
-        });
+        const url = `http://localhost:3000/deleteSalonFavorisParidClientidSalon`; 
+        const response = await fetch(url, {
+          method: 'delete',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              idClient: idUser,
+              idSalon: salon_id
+          })
+      });
+      if (response.ok) {
+          console.log('[+] Favoris efface avec succes');
+      } else {
+          console.error('Erreur lors de la supression des favoris', response);
+      }
       } else {
         await axios.post('http://localhost:3000/enregistrerSalonFavoris', {
           idClient: idUser,
@@ -123,7 +158,7 @@ const DetailsSalon = () => {
   const getCurrentReviews = () => {
     const startIndex = (page - 1) * reviewsPerPage;
     const endIndex = startIndex + reviewsPerPage;
-    return salonDetails.reviews.slice(startIndex, endIndex);
+    return salonDetails.allSalons.reviews.slice(startIndex, endIndex);
   };
 
   const handelPopupClose = () => {
@@ -219,26 +254,26 @@ const DetailsSalon = () => {
 
   return (
     <Container style={{ marginTop: '9em', marginBottom: '8em' }}>
-      {salonDetails.hasOwnProperty('salon') && (
+      {salonDetails.hasOwnProperty('url') && (
         <>
           <Segment style={{ borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 1)'}}>
             <Grid>
             <Grid.Column width={16}>
-                <Header as="h1" textAlign="center" style={{ fontSize: '5em', marginBottom:'0.5em', marginTop:'0.5em'}}>{salonDetails.salon[0].nomSalon}</Header>
+                <Header as="h1" textAlign="center" style={{ fontSize: '5em', marginBottom:'0.5em', marginTop:'0.5em'}}>{salonDetails.allSalons.salon[0].nomSalon}</Header>
             </Grid.Column>
 
               <Grid.Column width={11}>
-                <Image style={{borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={URL.createObjectURL(new Blob([new Uint8Array(salonDetails.salon[0].photoProfil.data)]))}/>
+                <Image style={{borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={salonDetails.url}/>
                 <Header as="h1" textAlign='left'>Description</Header>
-                <p style={{textAlign: 'left', fontSize:'1.3em'}}> {salonDetails.salon[0].bio} </p>
+                <p style={{textAlign: 'left', fontSize:'1.3em'}}> {salonDetails.allSalons.salon[0].bio} </p>
               </Grid.Column>
 
               <Grid.Column width={5} textAlign='left'>
                 <Header as="h1" style={{marginBottom: '1em'}}>Information du Salon</Header>
-                <p style={{marginBottom: '2em'}}><Icon name='clock'/> <b>Horaire Aujourd'hui:</b> { salonDetails.horaire.length > 0 ? salonDetails.horaire[0].Ouverture + '-' +  salonDetails.horaire[0].Fermeture : "Fermé aujourd'hui"}</p>
-                <p style={{marginBottom: '2em'}}><Icon name='mail' /> <b>Email:</b> {salonDetails.salon[0].Email}</p>
-                <p style={{marginBottom: '2em'}}><Icon name='phone' /> <b>Telephone:</b> {salonDetails.salon[0].telephoneSalon}</p>
-                <p style={{marginBottom: '2em'}}><Icon name='map marker alternate' /> <b>Adresse:</b> {salonDetails.salon[0].adresse}</p>
+                <p style={{marginBottom: '2em'}}><Icon name='clock'/> <b>Horaire Aujourd'hui:</b> { salonDetails.allSalons.horaire.length > 0 ? salonDetails.horaire[0].Ouverture + '-' +  salonDetails.horaire[0].Fermeture : "Fermé aujourd'hui"}</p>
+                <p style={{marginBottom: '2em'}}><Icon name='mail' /> <b>Email:</b> {salonDetails.allSalons.salon[0].Email}</p>
+                <p style={{marginBottom: '2em'}}><Icon name='phone' /> <b>Telephone:</b> {salonDetails.allSalons.salon[0].telephoneSalon}</p>
+                <p style={{marginBottom: '2em'}}><Icon name='map marker alternate' /> <b>Adresse:</b> {salonDetails.allSalons.salon[0].adresse}</p>
 
                 <Button color='blue' circular onClick={() => setShowPopup(true)}> Prendre RDV </Button>
 
@@ -294,7 +329,7 @@ const DetailsSalon = () => {
                           text: `${coiffeur.PrenomCoiffeur} ${coiffeur.NomCoiffeur}`,
                           content: (
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                              <Image src={'/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_withou_3.jpg'} circular size='small' style={{ marginRight: '10px' }} />
+                              {/* <Image src={'/img/Default_A_modern_banner_for_a_barbershop_web_site_in_hd_withou_3.jpg'} circular size='small' style={{ marginRight: '10px' }} /> */}
                               <span>{coiffeur.PrenomCoiffeur} {coiffeur.NomCoiffeur}</span>
                             </div>
                           )
@@ -334,13 +369,10 @@ const DetailsSalon = () => {
               <Grid.Column width={16} textAlign='left'>
                 <Header as="h1">Images</Header>
                 <Grid stackable columns={5}>
-                    {salonDetails.photos.map((photo, index) => {
-                        const blob = new Blob([new Uint8Array(photo.picture.data)])
-                        const url = URL.createObjectURL(blob)
-
+                    {photos.map((photo, index) => {
                         return(
                             <Grid.Column key={index}>
-                                <Image style={{height:'200px', borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={url} fluid />
+                                <Image style={{height:'200px', borderRadius: '50px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)'}} src={photo.url} fluid />
                             </Grid.Column>
                         )
                 })}
@@ -357,7 +389,7 @@ const DetailsSalon = () => {
                   circular
                 />
                 <Button
-                  disabled={salonDetails.reviews.length <= page * reviewsPerPage}
+                  disabled={salonDetails.allSalons.reviews.length <= page * reviewsPerPage}
                   onClick={() => setPage(page + 1)}
                   icon='chevron right'
                   circular

@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require('../db');
 const checkBlacklist = require('../checkBlacklist')
 
-router.get('/DispoSalon', checkBlacklist, async (req,res) =>{
+router.get('/DispoSalon', async (req,res) =>{
     try{
         const {idSalon} = req.query
-
+        console.log('aaaaa', idSalon);
         const verifierSalon = await db.select().from('SalonCoiffure').where({idSalon})
 
         if(verifierSalon.length === 0){

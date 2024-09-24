@@ -98,7 +98,7 @@ create table RendezVous
 )
 
 -------------------------------------------------------------------------------------------------------------------------------
-
+drop table SalonCoiffure
 --Travail fait par Jorge/Alejandro
 create table SalonCoiffure
 (
@@ -107,18 +107,18 @@ create table SalonCoiffure
     telephoneSalon varchar(50) not null,
     adresse varchar(50) not null,
     bio text,
-    photoProfil blob not null,
+    PhotoSalon varchar(100),
     Email varchar(50) not null UNIQUE,
     MotDePasse varchar(128) not null
 )
 
 ------------------------------------------------------------------------------------------------------------------------------
-
+drop table PhotosSalon
 create table PhotosSalon 
 (
     idPhoto integer primary key autoincrement,
     SalonId integer,
-    picture blob,
+    picture varchar(100),
     foreign key(SalonId) REFERENCES SalonCoiffure(idSalon)
 )
 
